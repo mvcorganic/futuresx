@@ -1,0 +1,1340 @@
+{
+  "history": [
+    {
+      "time": "14:57:14",
+      "symbol": "MAGMAUSDT",
+      "type": "GAINER",
+      "side": "LONG",
+      "pnl": 0.94,
+      "exitReason": "3x Kâr (+$0.94)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "NIGHTUSDT",
+      "type": "GAINER",
+      "side": "LONG",
+      "pnl": 0.61,
+      "exitReason": "Slot Rotasyonu (+$0.61)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "PONSUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.63,
+      "exitReason": "Slot Rotasyonu (+$0.63)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.35,
+      "exitReason": "Slot Rotasyonu (+$0.35)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "MANAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.93,
+      "exitReason": "3x Kâr (+$0.93)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "FETUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "LDOUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.51,
+      "exitReason": "Slot Rotasyonu (+$0.51)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "THETAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "USUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.55,
+      "exitReason": "Slot Rotasyonu (+$0.55)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "TIAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.23,
+      "exitReason": "Slot Rotasyonu (+$0.23)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "CTUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.17,
+      "exitReason": "Slot Rotasyonu (+$0.17)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "ATOMUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "GALAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "FILUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.66,
+      "exitReason": "Slot Rotasyonu (+$0.66)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "ARBUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "DOTUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.73,
+      "exitReason": "Slot Rotasyonu (+$0.73)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "WLDUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "2ZUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "SNXUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.28,
+      "exitReason": "Slot Rotasyonu (+$0.28)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "SUIUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.23,
+      "exitReason": "Slot Rotasyonu (+$0.23)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "STXUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.2,
+      "exitReason": "Slot Rotasyonu (+$0.20)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "CRVUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "FLOWUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "VELVETUSDT",
+      "type": "GAINER",
+      "side": "LONG",
+      "pnl": 0.5,
+      "exitReason": "Slot Rotasyonu (+$0.50)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "NEARUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.25,
+      "exitReason": "Slot Rotasyonu (+$0.25)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "SANDUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "ONEUSDT",
+      "type": "GAINER",
+      "side": "LONG",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "INJUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "APTUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.18,
+      "exitReason": "Slot Rotasyonu (+$0.18)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "SEIUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.2,
+      "exitReason": "Slot Rotasyonu (+$0.20)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "BTWUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.16,
+      "exitReason": "Slot Rotasyonu (+$0.16)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "AXSUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.16,
+      "exitReason": "Slot Rotasyonu (+$0.16)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "CFXUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.17,
+      "exitReason": "Slot Rotasyonu (+$0.17)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "RUNEUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.17,
+      "exitReason": "Slot Rotasyonu (+$0.17)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "UNIUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.29,
+      "exitReason": "Slot Rotasyonu (+$0.29)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "QNTUSDT",
+      "type": "GAINER",
+      "side": "LONG",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "AAVEUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.45,
+      "exitReason": "Slot Rotasyonu (+$0.45)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "LTCUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "RENDERUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.18,
+      "exitReason": "Slot Rotasyonu (+$0.18)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "ATHUSDT",
+      "type": "GAINER",
+      "side": "LONG",
+      "pnl": 1.3,
+      "exitReason": "3x Kâr (+$1.30)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "AVAXUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "ICPUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.16,
+      "exitReason": "Slot Rotasyonu (+$0.16)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "GRTUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "LYNUSDT",
+      "type": "GAINER",
+      "side": "LONG",
+      "pnl": 1.01,
+      "exitReason": "3x Kâr (+$1.01)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "ZROUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "WIFUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "ADAUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "OPUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.2,
+      "exitReason": "Slot Rotasyonu (+$0.20)"
+    },
+    {
+      "time": "14:57:14",
+      "symbol": "LINKUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "14:53:55",
+      "symbol": "ATHUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": -5.03,
+      "exitReason": "Stop Zarar (-$5.03)"
+    },
+    {
+      "time": "14:53:24",
+      "symbol": "SNXUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "14:52:49",
+      "symbol": "SEIUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.18,
+      "exitReason": "Slot Rotasyonu (+$0.18)"
+    },
+    {
+      "time": "14:52:49",
+      "symbol": "WIFUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "NIGHTUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 4.37,
+      "exitReason": "3x Kâr (+$4.37)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "APTUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.38,
+      "exitReason": "Slot Rotasyonu (+$0.38)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "NEARUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 1.85,
+      "exitReason": "3x Kâr (+$1.85)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "INJUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.31,
+      "exitReason": "Slot Rotasyonu (+$0.31)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "ATOMUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 1.28,
+      "exitReason": "3x Kâr (+$1.28)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "GALAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 1.65,
+      "exitReason": "3x Kâr (+$1.65)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "FLOWUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.78,
+      "exitReason": "Slot Rotasyonu (+$0.78)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "WLDUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.87,
+      "exitReason": "3x Kâr (+$0.87)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "DOTUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 2.69,
+      "exitReason": "3x Kâr (+$2.69)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "LDOUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.82,
+      "exitReason": "Slot Rotasyonu (+$0.82)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "VELVETUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 7.78,
+      "exitReason": "3x Kâr (+$7.78)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "TIAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "SANDUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 8.25,
+      "exitReason": "3x Kâr (+$8.25)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "2ZUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 2.1,
+      "exitReason": "3x Kâr (+$2.10)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "MANAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 4.87,
+      "exitReason": "3x Kâr (+$4.87)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "FETUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.64,
+      "exitReason": "Slot Rotasyonu (+$0.64)"
+    },
+    {
+      "time": "14:52:39",
+      "symbol": "ZROUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": -3.97,
+      "exitReason": "Stop Zarar (-$3.97)"
+    },
+    {
+      "time": "13:57:40",
+      "symbol": "ICPUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.16,
+      "exitReason": "Slot Rotasyonu (+$0.16)"
+    },
+    {
+      "time": "13:57:24",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.15,
+      "exitReason": "Slot Rotasyonu (+$0.15)"
+    },
+    {
+      "time": "13:57:12",
+      "symbol": "AVAXUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "13:57:09",
+      "symbol": "AXSUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.67,
+      "exitReason": "Slot Rotasyonu (+$0.67)"
+    },
+    {
+      "time": "13:57:04",
+      "symbol": "RUNEUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.17,
+      "exitReason": "Slot Rotasyonu (+$0.17)"
+    },
+    {
+      "time": "13:57:04",
+      "symbol": "PONSUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.35,
+      "exitReason": "Slot Rotasyonu (+$0.35)"
+    },
+    {
+      "time": "13:56:54",
+      "symbol": "NIGHTUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "13:56:50",
+      "symbol": "APTUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.18,
+      "exitReason": "Slot Rotasyonu (+$0.18)"
+    },
+    {
+      "time": "13:56:44",
+      "symbol": "USUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "13:55:49",
+      "symbol": "ATHUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.52,
+      "exitReason": "3x Kâr (+$1.52)"
+    },
+    {
+      "time": "13:55:39",
+      "symbol": "THETAUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.48,
+      "exitReason": "Slot Rotasyonu (+$0.48)"
+    },
+    {
+      "time": "13:55:39",
+      "symbol": "CFXUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.23,
+      "exitReason": "Slot Rotasyonu (+$0.23)"
+    },
+    {
+      "time": "13:55:33",
+      "symbol": "ONEUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.31,
+      "exitReason": "Slot Rotasyonu (+$0.31)"
+    },
+    {
+      "time": "13:54:57",
+      "symbol": "CTUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.18,
+      "exitReason": "Slot Rotasyonu (+$0.18)"
+    },
+    {
+      "time": "13:54:57",
+      "symbol": "ATHUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.3,
+      "exitReason": "3x Kâr (+$1.30)"
+    },
+    {
+      "time": "13:54:52",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.17,
+      "exitReason": "Slot Rotasyonu (+$0.17)"
+    },
+    {
+      "time": "13:54:48",
+      "symbol": "RENDERUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.18,
+      "exitReason": "Slot Rotasyonu (+$0.18)"
+    },
+    {
+      "time": "13:54:36",
+      "symbol": "NIGHTUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.29,
+      "exitReason": "Slot Rotasyonu (+$0.29)"
+    },
+    {
+      "time": "13:54:35",
+      "symbol": "GALAUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.86,
+      "exitReason": "3x Kâr (+$0.86)"
+    },
+    {
+      "time": "13:54:26",
+      "symbol": "FLOWUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.28,
+      "exitReason": "Slot Rotasyonu (+$0.28)"
+    },
+    {
+      "time": "13:54:23",
+      "symbol": "USUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.18,
+      "exitReason": "Slot Rotasyonu (+$0.18)"
+    },
+    {
+      "time": "13:54:09",
+      "symbol": "MAGMAUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 9.84,
+      "exitReason": "3x Kâr (+$9.84)"
+    },
+    {
+      "time": "13:53:30",
+      "symbol": "LTCUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "13:53:22",
+      "symbol": "WLDUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.95,
+      "exitReason": "3x Kâr (+$0.95)"
+    },
+    {
+      "time": "13:53:22",
+      "symbol": "MAGMAUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.26,
+      "exitReason": "3x Kâr (+$1.26)"
+    },
+    {
+      "time": "13:53:22",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.71,
+      "exitReason": "3x Kâr (+$0.71)"
+    },
+    {
+      "time": "13:53:14",
+      "symbol": "WLDUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.27,
+      "exitReason": "Slot Rotasyonu (+$0.27)"
+    },
+    {
+      "time": "13:53:00",
+      "symbol": "AAVEUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.45,
+      "exitReason": "Slot Rotasyonu (+$0.45)"
+    },
+    {
+      "time": "13:52:59",
+      "symbol": "MAGMAUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.12,
+      "exitReason": "3x Kâr (+$1.12)"
+    },
+    {
+      "time": "13:52:52",
+      "symbol": "GALAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.29,
+      "exitReason": "Slot Rotasyonu (+$0.29)"
+    },
+    {
+      "time": "13:52:34",
+      "symbol": "MAGMAUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.19,
+      "exitReason": "3x Kâr (+$1.19)"
+    },
+    {
+      "time": "13:52:29",
+      "symbol": "MAGMAUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": -5.28,
+      "exitReason": "Stop Zarar (-$5.28)"
+    },
+    {
+      "time": "13:52:24",
+      "symbol": "QNTUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "13:52:10",
+      "symbol": "NIGHTUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "13:51:59",
+      "symbol": "DOTUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.94,
+      "exitReason": "Slot Rotasyonu (+$0.94)"
+    },
+    {
+      "time": "13:51:57",
+      "symbol": "UNIUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.29,
+      "exitReason": "Slot Rotasyonu (+$0.29)"
+    },
+    {
+      "time": "13:51:48",
+      "symbol": "RUNEUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.17,
+      "exitReason": "Slot Rotasyonu (+$0.17)"
+    },
+    {
+      "time": "13:51:39",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.71,
+      "exitReason": "3x Kâr (+$0.71)"
+    },
+    {
+      "time": "13:51:39",
+      "symbol": "THETAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "13:51:39",
+      "symbol": "CFXUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.17,
+      "exitReason": "Slot Rotasyonu (+$0.17)"
+    },
+    {
+      "time": "13:51:18",
+      "symbol": "AXSUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.16,
+      "exitReason": "Slot Rotasyonu (+$0.16)"
+    },
+    {
+      "time": "13:51:12",
+      "symbol": "CTUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.29,
+      "exitReason": "Slot Rotasyonu (+$0.29)"
+    },
+    {
+      "time": "13:51:11",
+      "symbol": "MAGMAUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.91,
+      "exitReason": "3x Kâr (+$0.91)"
+    },
+    {
+      "time": "13:51:01",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.71,
+      "exitReason": "3x Kâr (+$0.71)"
+    },
+    {
+      "time": "13:50:54",
+      "symbol": "LDOUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.27,
+      "exitReason": "Slot Rotasyonu (+$0.27)"
+    },
+    {
+      "time": "13:50:34",
+      "symbol": "NIGHTUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "13:50:34",
+      "symbol": "FLOWUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.9,
+      "exitReason": "3x Kâr (+$0.90)"
+    },
+    {
+      "time": "13:50:21",
+      "symbol": "SUIUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 0.3,
+      "exitReason": "Slot Rotasyonu (+$0.30)"
+    },
+    {
+      "time": "13:49:24",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "13:49:17",
+      "symbol": "BTWUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.16,
+      "exitReason": "Slot Rotasyonu (+$0.16)"
+    },
+    {
+      "time": "13:49:13",
+      "symbol": "SEIUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.2,
+      "exitReason": "Slot Rotasyonu (+$0.20)"
+    },
+    {
+      "time": "13:49:05",
+      "symbol": "APTUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.18,
+      "exitReason": "Slot Rotasyonu (+$0.18)"
+    },
+    {
+      "time": "13:48:50",
+      "symbol": "DOTUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.2,
+      "exitReason": "Slot Rotasyonu (+$0.20)"
+    },
+    {
+      "time": "13:48:35",
+      "symbol": "FLOWUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 1.4,
+      "exitReason": "3x Kâr (+$1.40)"
+    },
+    {
+      "time": "13:48:33",
+      "symbol": "FLOWUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 1.66,
+      "exitReason": "3x Kâr (+$1.66)"
+    },
+    {
+      "time": "13:48:28",
+      "symbol": "INJUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "13:48:14",
+      "symbol": "MAGMAUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.48,
+      "exitReason": "3x Kâr (+$1.48)"
+    },
+    {
+      "time": "13:48:14",
+      "symbol": "USUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "13:48:11",
+      "symbol": "TIAUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.35,
+      "exitReason": "Slot Rotasyonu (+$0.35)"
+    },
+    {
+      "time": "13:48:05",
+      "symbol": "LDOUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.27,
+      "exitReason": "Slot Rotasyonu (+$0.27)"
+    },
+    {
+      "time": "13:48:00",
+      "symbol": "NIGHTUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "13:47:57",
+      "symbol": "ONEUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "13:47:53",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.79,
+      "exitReason": "3x Kâr (+$0.79)"
+    },
+    {
+      "time": "13:47:45",
+      "symbol": "ATOMUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.32,
+      "exitReason": "Slot Rotasyonu (+$0.32)"
+    },
+    {
+      "time": "13:47:38",
+      "symbol": "SANDUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "13:47:35",
+      "symbol": "NEARUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 0.25,
+      "exitReason": "Slot Rotasyonu (+$0.25)"
+    },
+    {
+      "time": "13:47:13",
+      "symbol": "VELVETUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.5,
+      "exitReason": "Slot Rotasyonu (+$0.50)"
+    },
+    {
+      "time": "13:46:59",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.36,
+      "exitReason": "Slot Rotasyonu (+$0.36)"
+    },
+    {
+      "time": "13:46:43",
+      "symbol": "FLOWUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "13:46:42",
+      "symbol": "CRVUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "13:46:34",
+      "symbol": "STXUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.2,
+      "exitReason": "Slot Rotasyonu (+$0.20)"
+    },
+    {
+      "time": "13:46:30",
+      "symbol": "SUIUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.23,
+      "exitReason": "Slot Rotasyonu (+$0.23)"
+    },
+    {
+      "time": "13:46:23",
+      "symbol": "SNXUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.28,
+      "exitReason": "Slot Rotasyonu (+$0.28)"
+    },
+    {
+      "time": "13:46:00",
+      "symbol": "2ZUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.19,
+      "exitReason": "Slot Rotasyonu (+$0.19)"
+    },
+    {
+      "time": "13:45:50",
+      "symbol": "WLDUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "13:45:49",
+      "symbol": "DOTUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 0.73,
+      "exitReason": "Slot Rotasyonu (+$0.73)"
+    },
+    {
+      "time": "13:45:48",
+      "symbol": "NIGHTUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.16,
+      "exitReason": "Slot Rotasyonu (+$0.16)"
+    },
+    {
+      "time": "13:45:39",
+      "symbol": "ARBUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.22,
+      "exitReason": "Slot Rotasyonu (+$0.22)"
+    },
+    {
+      "time": "13:45:32",
+      "symbol": "FILUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.66,
+      "exitReason": "Slot Rotasyonu (+$0.66)"
+    },
+    {
+      "time": "13:45:24",
+      "symbol": "GALAUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "13:45:21",
+      "symbol": "牛来USDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0,
+      "exitReason": "Karakter Filtresi (Latin Dışı)"
+    },
+    {
+      "time": "13:45:21",
+      "symbol": "龙虾USDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0,
+      "exitReason": "Karakter Filtresi (Latin Dışı)"
+    },
+    {
+      "time": "13:45:15",
+      "symbol": "ATOMUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "13:45:04",
+      "symbol": "CTUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.17,
+      "exitReason": "Slot Rotasyonu (+$0.17)"
+    },
+    {
+      "time": "13:44:53",
+      "symbol": "TIAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.23,
+      "exitReason": "Slot Rotasyonu (+$0.23)"
+    },
+    {
+      "time": "13:44:51",
+      "symbol": "USUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.55,
+      "exitReason": "Slot Rotasyonu (+$0.55)"
+    },
+    {
+      "time": "13:44:49",
+      "symbol": "THETAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "13:44:44",
+      "symbol": "LDOUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.51,
+      "exitReason": "Slot Rotasyonu (+$0.51)"
+    },
+    {
+      "time": "13:44:42",
+      "symbol": "MAGMAUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.08,
+      "exitReason": "3x Kâr (+$1.08)"
+    },
+    {
+      "time": "13:44:34",
+      "symbol": "牛来USDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.42,
+      "exitReason": "Slot Rotasyonu (+$0.42)"
+    },
+    {
+      "time": "10:44:29",
+      "symbol": "FETUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.24,
+      "exitReason": "Slot Rotasyonu (+$0.24)"
+    },
+    {
+      "time": "10:44:22",
+      "symbol": "PONSUSDT",
+      "type": "LOSER",
+      "side": "LONG",
+      "pnl": 0.21,
+      "exitReason": "Slot Rotasyonu (+$0.21)"
+    },
+    {
+      "time": "10:44:14",
+      "symbol": "MANAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.93,
+      "exitReason": "3x Kâr (+$0.93)"
+    },
+    {
+      "time": "10:44:06",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.79,
+      "exitReason": "3x Kâr (+$0.79)"
+    },
+    {
+      "time": "10:44:04",
+      "symbol": "MOVRUSDT",
+      "type": "BALON",
+      "side": "SHORT",
+      "pnl": 0.35,
+      "exitReason": "Slot Rotasyonu (+$0.35)"
+    },
+    {
+      "time": "10:43:34",
+      "symbol": "NIGHTUSDT",
+      "type": "BALON",
+      "side": "LONG",
+      "pnl": 0.35,
+      "exitReason": "Slot Rotasyonu (+$0.35)"
+    },
+    {
+      "time": "10:42:38",
+      "symbol": "龙虾USDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.71,
+      "exitReason": "3x Kâr (+$1.71)"
+    }
+  ]
+}

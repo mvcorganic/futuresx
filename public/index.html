@@ -128,42 +128,78 @@
       </div>
     </div>
 
-    <!-- Kapanan İşlem Günlüğü ve Özet Bilgi Şeridi -->
+    <!-- Kapanan İşlem Günlüğü ve 5 HAVUZ KÂR | ZARAR | İŞLEM ŞERİDİ -->
     <div class="card-panel rounded-lg p-3 sm:p-4 space-y-3">
       <div class="text-sm font-bold text-gray-200 flex items-center justify-between">
         <span>📜 Vadeli Kapanan İşlem Günlüğü</span>
         <span id="historyCount" class="text-xs text-gray-400">Kayıtlı: 0 İşlem</span>
       </div>
 
-      <!-- 7'li Özet Bilgi Şeridi -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-xs">
-        <div class="box-cell rounded p-2 text-center">
-          <div class="text-gray-400 text-[11px]">Kapanan Pozisyon</div>
-          <div id="summaryClosedCount" class="font-bold text-white mt-0.5">0</div>
+      <!-- KÂR | ZARAR | İŞLEM SAYISI KARTLARI -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 text-xs">
+        <!-- 1. Majör (M) -->
+        <div class="box-cell rounded p-2.5 border-l-2 border-l-sky-500 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sky-400 text-xs">Majör (M)</span>
+            <span id="countMajor" class="text-[10px] text-gray-400 bg-gray-800/80 px-1.5 py-0.5 rounded font-mono">0 İşlem</span>
+          </div>
+          <div class="flex items-baseline gap-1 mt-2 text-sm font-bold font-mono">
+            <span id="winMajor" class="text-emerald-400">+$0.00</span>
+            <span class="text-gray-600 font-normal">|</span>
+            <span id="lossMajor" class="text-rose-500">-$0.00</span>
+          </div>
         </div>
-        <div class="box-cell rounded p-2 text-center">
-          <div class="text-gray-400 text-[11px]">Majör (M) PnL</div>
-          <div id="summaryMajorPnl" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+
+        <!-- 2. Avcı (H) -->
+        <div class="box-cell rounded p-2.5 border-l-2 border-l-purple-500 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-purple-400 text-xs">Avcı (H)</span>
+            <span id="countHunter" class="text-[10px] text-gray-400 bg-gray-800/80 px-1.5 py-0.5 rounded font-mono">0 İşlem</span>
+          </div>
+          <div class="flex items-baseline gap-1 mt-2 text-sm font-bold font-mono">
+            <span id="winHunter" class="text-emerald-400">+$0.00</span>
+            <span class="text-gray-600 font-normal">|</span>
+            <span id="lossHunter" class="text-rose-500">-$0.00</span>
+          </div>
         </div>
-        <div class="box-cell rounded p-2 text-center">
-          <div class="text-gray-400 text-[11px]">Avcı (H) PnL</div>
-          <div id="summaryHunterPnl" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+
+        <!-- 3. Balon (B) -->
+        <div class="box-cell rounded p-2.5 border-l-2 border-l-rose-500 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-rose-400 text-xs">Balon (B)</span>
+            <span id="countBalon" class="text-[10px] text-gray-400 bg-gray-800/80 px-1.5 py-0.5 rounded font-mono">0 İşlem</span>
+          </div>
+          <div class="flex items-baseline gap-1 mt-2 text-sm font-bold font-mono">
+            <span id="winBalon" class="text-emerald-400">+$0.00</span>
+            <span class="text-gray-600 font-normal">|</span>
+            <span id="lossBalon" class="text-rose-500">-$0.00</span>
+          </div>
         </div>
-        <div class="box-cell rounded p-2 text-center">
-          <div class="text-gray-400 text-[11px]">Toplam Kâr</div>
-          <div id="summaryTotalWin" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+
+        <!-- 4. Gainers (G) -->
+        <div class="box-cell rounded p-2.5 border-l-2 border-l-amber-500 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-amber-400 text-xs">Gainers (G)</span>
+            <span id="countGainer" class="text-[10px] text-gray-400 bg-gray-800/80 px-1.5 py-0.5 rounded font-mono">0 İşlem</span>
+          </div>
+          <div class="flex items-baseline gap-1 mt-2 text-sm font-bold font-mono">
+            <span id="winGainer" class="text-emerald-400">+$0.00</span>
+            <span class="text-gray-600 font-normal">|</span>
+            <span id="lossGainer" class="text-rose-500">-$0.00</span>
+          </div>
         </div>
-        <div class="box-cell rounded p-2 text-center">
-          <div class="text-gray-400 text-[11px]">Toplam Zarar</div>
-          <div id="summaryTotalLoss" class="font-bold text-rose-500 mt-0.5">-$0.00</div>
-        </div>
-        <div class="box-cell rounded p-2 text-center">
-          <div class="text-gray-400 text-[11px]">Ortalama Kâr</div>
-          <div id="summaryAvgWin" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
-        </div>
-        <div class="box-cell rounded p-2 text-center col-span-2 sm:col-span-1">
-          <div class="text-gray-400 text-[11px]">Ortalama Zarar</div>
-          <div id="summaryAvgLoss" class="font-bold text-rose-500 mt-0.5">-$0.00</div>
+
+        <!-- 5. Losers (L) -->
+        <div class="box-cell rounded p-2.5 border-l-2 border-l-cyan-500 col-span-2 sm:col-span-1 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-cyan-400 text-xs">Losers (L)</span>
+            <span id="countLoser" class="text-[10px] text-gray-400 bg-gray-800/80 px-1.5 py-0.5 rounded font-mono">0 İşlem</span>
+          </div>
+          <div class="flex items-baseline gap-1 mt-2 text-sm font-bold font-mono">
+            <span id="winLoser" class="text-emerald-400">+$0.00</span>
+            <span class="text-gray-600 font-normal">|</span>
+            <span id="lossLoser" class="text-rose-500">-$0.00</span>
+          </div>
         </div>
       </div>
 
@@ -203,7 +239,6 @@
       return sym.endsWith('USDT') ? sym.slice(0, -4) : sym;
     }
 
-    // Kategori Kısaltmaları (M, H, B, G, L)
     function getTypeShort(type) {
       if (type === 'MAJOR') return 'M';
       if (type === 'HUNTER') return 'H';
@@ -338,34 +373,58 @@
           }).join('');
         }
 
-        // Kapanan İşlem Özeti (Alt Kutucuklar)
-        document.getElementById("historyCount").textContent = "Kayıtlı: " + tradeCount + " İşlem";
-        document.getElementById("summaryClosedCount").textContent = tradeCount;
+        // ==========================================
+        // HAVUZ BAZLI: KÂR | ZARAR | İŞLEM SAYISI
+        // ==========================================
+        document.getElementById("historyCount").textContent = "Kayıtlı: " + hist.length + " İşlem";
 
-        const mPnl = ds.majorPnl !== undefined ? ds.majorPnl : 0;
-        const mEl = document.getElementById("summaryMajorPnl");
-        mEl.textContent = (mPnl >= 0 ? "+" : "") + "$" + mPnl.toFixed(2);
-        mEl.className = "font-bold mt-0.5 " + (mPnl >= 0 ? "text-emerald-400" : "text-rose-500");
+        const poolStats = {
+          MAJOR: { win: 0, loss: 0, count: 0 },
+          HUNTER: { win: 0, loss: 0, count: 0 },
+          BALON: { win: 0, loss: 0, count: 0 },
+          GAINER: { win: 0, loss: 0, count: 0 },
+          LOSER: { win: 0, loss: 0, count: 0 }
+        };
 
-        const hPnl = ds.hunterPnl !== undefined ? ds.hunterPnl : 0;
-        const hEl = document.getElementById("summaryHunterPnl");
-        hEl.textContent = (hPnl >= 0 ? "+" : "") + "$" + hPnl.toFixed(2);
-        hEl.className = "font-bold mt-0.5 " + (hPnl >= 0 ? "text-emerald-400" : "text-rose-500");
+        hist.forEach(h => {
+          const t = h.type || 'HUNTER';
+          if (poolStats[t]) {
+            const val = Number(h.pnl || 0);
+            if (val >= 0) {
+              poolStats[t].win += val;
+            } else {
+              poolStats[t].loss += Math.abs(val);
+            }
+            poolStats[t].count += 1;
+          }
+        });
 
-        const wEl = document.getElementById("summaryTotalWin");
-        wEl.textContent = (todayNetProfit >= 0 ? "+" : "") + "$" + Number(todayNetProfit).toFixed(2);
-        wEl.className = "font-bold mt-0.5 " + (todayNetProfit >= 0 ? "text-emerald-400" : "text-rose-500");
+        // 1. Majör
+        document.getElementById("winMajor").textContent = "+$" + poolStats.MAJOR.win.toFixed(2);
+        document.getElementById("lossMajor").textContent = "-$" + poolStats.MAJOR.loss.toFixed(2);
+        document.getElementById("countMajor").textContent = poolStats.MAJOR.count + " İşlem";
 
-        const tLoss = (ds.totalLoss !== undefined && ds.totalLoss > 0) ? ds.totalLoss : (s.todayLoss || 0);
-        document.getElementById("summaryTotalLoss").textContent = "-$" + Number(tLoss).toFixed(2);
+        // 2. Avcı
+        document.getElementById("winHunter").textContent = "+$" + poolStats.HUNTER.win.toFixed(2);
+        document.getElementById("lossHunter").textContent = "-$" + poolStats.HUNTER.loss.toFixed(2);
+        document.getElementById("countHunter").textContent = poolStats.HUNTER.count + " İşlem";
 
-        const aWin = ds.avgProfit !== undefined ? ds.avgProfit : 0;
-        document.getElementById("summaryAvgWin").textContent = "+$" + Number(aWin).toFixed(2);
+        // 3. Balon
+        document.getElementById("winBalon").textContent = "+$" + poolStats.BALON.win.toFixed(2);
+        document.getElementById("lossBalon").textContent = "-$" + poolStats.BALON.loss.toFixed(2);
+        document.getElementById("countBalon").textContent = poolStats.BALON.count + " İşlem";
 
-        const aLoss = ds.avgLoss !== undefined ? ds.avgLoss : 0;
-        document.getElementById("summaryAvgLoss").textContent = "-$" + Number(aLoss).toFixed(2);
+        // 4. Gainers
+        document.getElementById("winGainer").textContent = "+$" + poolStats.GAINER.win.toFixed(2);
+        document.getElementById("lossGainer").textContent = "-$" + poolStats.GAINER.loss.toFixed(2);
+        document.getElementById("countGainer").textContent = poolStats.GAINER.count + " İşlem";
 
-        // Kapanan Tabloyu Doldur (Tek Harfli Havuz & Yön)
+        // 5. Losers
+        document.getElementById("winLoser").textContent = "+$" + poolStats.LOSER.win.toFixed(2);
+        document.getElementById("lossLoser").textContent = "-$" + poolStats.LOSER.loss.toFixed(2);
+        document.getElementById("countLoser").textContent = poolStats.LOSER.count + " İşlem";
+
+        // Kapanan Tablo Listesi
         const tbodyHist = document.getElementById('historyBody');
         if (hist.length > 0) {
           tbodyHist.innerHTML = hist.map(h => {
