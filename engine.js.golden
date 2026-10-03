@@ -1,0 +1,384 @@
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
+const config = require('./config');
+
+const STATE_FILE = path.join(__dirname, 'data', 'state.json');
+
+let state = {
+  stats: {
+    currentTotalEquity: 10000.00,
+    freeMargin: 10000.00,
+    usedMargin: 0.00,
+    liveUnrealizedPnl: 0.00,
+    todayClosedPnl: 0.00,
+    totalClosedPnl: 0.00,
+    todayLossPnl: 0.00,
+    todayTrades: 0,
+    totalTrades: 0,
+    bnbBalance: 1.00
+  },
+  positions: {},
+  history: []
+};
+
+try {
+  if (fs.existsSync(STATE_FILE)) {
+    const raw = fs.readFileSync(STATE_FILE, 'utf-8');
+    const parsed = JSON.parse(raw);
+    state.stats = { ...state.stats, ...parsed.stats };
+    state.history = parsed.history || [];
+    state.positions = parsed.positions || {};
+  }
+} catch (e) {}
+
+function saveState() {
+  try {
+    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+  } catch (e) {}
+}
+
+// 00:00 Gece Devri
+let currentDateStr = new Date().toISOString().slice(0, 10);
+setInterval(() => {
+  const nowStr = new Date().toISOString().slice(0, 10);
+  if (nowStr !== currentDateStr) {
+    currentDateStr = nowStr;
+    state.stats.todayClosedPnl = 0.0;
+    state.stats.todayLossPnl = 0.0;
+    state.stats.todayTrades = 0;
+    saveState();
+  }
+}, 10000);
+
+const MAJOR_LIST = config.MAJOR_SYMBOLS;
+const HUNTER_LIST = config.HUNTER_SYMBOLS;
+const ALL_SYMBOLS = [...MAJOR_LIST, ...HUNTER_LIST];
+
+const FUTURES_PROFILES = {};
+const candleStore = {};
+const prevPrices = {};
+const prices = {};
+
+ALL_SYMBOLS.forEach(sym => {
+  candleStore[sym] = [];
+  const isMajor = MAJOR_LIST.includes(sym);
+  FUTURES_PROFILES[sym] = {
+    type: isMajor ? "MAJOR" : "HUNTER",
+    longRsi: isMajor ? 45.0 : 46.5,
+    longZ: isMajor ? -0.60 : -0.50,
+    shortRsi: isMajor ? 55.0 : 53.5,
+    shortZ: isMajor ? 0.60 : 0.50,
+    startMargin: isMajor ? 100.0 : 60.0,
+    totalBudget: isMajor ? 600 : 400
+  };
+});
+
+function calculateIndicators(closes) {
+  if (!Array.isArray(closes) || closes.length < 14) {
+    const lastP = closes && closes.length > 0 ? closes[closes.length - 1] : 0;
+    return { rsi: 50, zScore: 0, ema20: lastP };
+  }
+  let gains = 0, losses = 0;
+  for (let i = 1; i <= 14; i++) {
+    const diff = closes[i] - closes[i - 1];
+    if (diff >= 0) gains += diff; else losses -= diff;
+  }
+  let avgGain = gains / 14, avgLoss = losses / 14;
+  for (let i = 15; i < closes.length; i++) {
+    const diff = closes[i] - closes[i - 1];
+    avgGain = (avgGain * 13 + (diff > 0 ? diff : 0)) / 14;
+    avgLoss = (avgLoss * 13 + (diff < 0 ? -diff : 0)) / 14;
+  }
+  const rs = avgLoss === 0 ? 100 : avgGain / avgLoss;
+  const rsi = 100 - (100 / (1 + rs));
+
+  const mean = closes.reduce((a, b) => a + b, 0) / closes.length;
+  const variance = closes.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / closes.length;
+  const std = Math.sqrt(variance) || 0.0001;
+  const zScore = (closes[closes.length - 1] - mean) / std;
+
+  const k = 2 / 21;
+  let ema20 = closes[0];
+  for (let i = 1; i < closes.length; i++) {
+    ema20 = (closes[i] * k) + (ema20 * (1 - k));
+  }
+
+  return {
+    rsi: parseFloat(rsi.toFixed(1)),
+    zScore: parseFloat(zScore.toFixed(2)),
+    ema20: parseFloat(ema20.toFixed(6))
+  };
+}
+
+// 1. CANLI SANİYELİK FİYAT AKIŞI
+function fetchPricesDirect() {
+  const url = "https://fapi.binance.com/fapi/v1/ticker/price";
+  https.get(url, { timeout: 900 }, (res) => {
+    let raw = "";
+    res.on("data", chunk => raw += chunk);
+    res.on("end", () => {
+      try {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) {
+          arr.forEach(item => {
+            const p = parseFloat(item.price);
+            if (p > 0) prices[item.symbol] = p;
+          });
+
+          ALL_SYMBOLS.forEach(sym => {
+            const curP = prices[sym];
+            if (curP && curP > 0) {
+              if (candleStore[sym] && candleStore[sym].length > 0) {
+                candleStore[sym][candleStore[sym].length - 1] = curP;
+              }
+              evaluateFutures(sym, curP);
+              prevPrices[sym] = curP;
+            }
+          });
+
+          syncTotals();
+        }
+      } catch (e) {}
+    });
+  }).on("error", () => {});
+}
+
+// 2. ARKA PLAN MUM GÜNCELLEMESİ (30sn periyot, 120ms yayılı)
+function fetchCandleBatch() {
+  ALL_SYMBOLS.forEach((sym, idx) => {
+    setTimeout(() => {
+      const url = `https://fapi.binance.com/fapi/v1/klines?symbol=${sym}&interval=1m&limit=25`;
+      https.get(url, { timeout: 3500 }, (res) => {
+        let raw = '';
+        res.on('data', c => raw += c);
+        res.on('end', () => {
+          try {
+            const arr = JSON.parse(raw);
+            if (Array.isArray(arr) && arr.length >= 14) {
+              candleStore[sym] = arr.map(item => parseFloat(item[4]));
+            }
+          } catch(e) {}
+        });
+      }).on('error', () => {});
+    }, idx * 120);
+  });
+}
+
+fetchCandleBatch();
+setInterval(fetchCandleBatch, 30000);
+
+fetchPricesDirect();
+setInterval(fetchPricesDirect, 1000);
+
+function evaluateFutures(sym, curPrice) {
+  if (!curPrice || curPrice <= 0) return;
+  const prevP = prevPrices[sym] || curPrice;
+  const prof = FUTURES_PROFILES[sym];
+  if (!prof) return;
+
+  const pos = state.positions[sym];
+  const closes = (candleStore[sym] && candleStore[sym].length >= 14) ? candleStore[sym] : [curPrice];
+  const ind = calculateIndicators(closes);
+
+  // 1. AÇIK POZİSYON KONTROLÜ
+  if (pos && pos.inPosition) {
+    pos.curPrice = curPrice;
+    const isLong = pos.side === "LONG";
+    const priceDiff = isLong ? (curPrice - pos.avgPrice) : (pos.avgPrice - curPrice);
+    const pnlPct = priceDiff / pos.avgPrice;
+    const notional = pos.totalMargin * 3;
+    const grossPnl = notional * pnlPct;
+    const estFee = notional * 0.0009;
+    const netPnl = parseFloat((grossPnl - estFee).toFixed(2));
+
+    pos.livePnl = netPnl;
+    pos.unrealizedPnl = netPnl;
+    pos.markPrice = curPrice;
+
+    if (pos.minPnl === undefined || pos.livePnl < pos.minPnl) pos.minPnl = pos.livePnl;
+    if (pos.maxPnl === undefined || pos.livePnl > pos.maxPnl) pos.maxPnl = pos.livePnl;
+
+    // === ULTRA HIZLI SERİ KÂR ALMA (Net >= +$1.00 Görüldüğü An Kapat) ===
+    if (netPnl >= 1.00) {
+      const profitRealized = netPnl;
+      const closedSide = pos.side;
+
+      state.stats.currentTotalEquity = parseFloat((state.stats.currentTotalEquity + profitRealized).toFixed(2));
+      state.stats.totalClosedPnl = parseFloat((state.stats.totalClosedPnl + profitRealized).toFixed(2));
+      state.stats.todayClosedPnl = parseFloat((state.stats.todayClosedPnl + profitRealized).toFixed(2));
+      state.stats.totalTrades++;
+      state.stats.todayTrades++;
+
+      state.history.unshift({
+        time: new Date().toLocaleTimeString('tr-TR'),
+        symbol: sym,
+        type: prof.type,
+        side: closedSide,
+        pnl: profitRealized,
+        exitReason: `3x Kâr (+Ş${profitRealized})`
+      });
+      if (state.history.length > 50) state.history.pop();
+
+      delete state.positions[sym];
+      saveState();
+      console.log(`[⚡ SERİ KÂR ALINDI] ${sym} (${prof.type}) ${closedSide} -> Net: +$${profitRealized}`);
+
+      // 200 ms içinde anında yeniden giriş kontrolü
+      setTimeout(() => {
+        try { evaluateFutures(sym, curPrice); } catch(e) {}
+      }, 200);
+      return;
+    }
+
+    // === YATAYDA KİLİTLENMEYİ ÖNLEYEN ROTASYON (12 dk kuralı) ===
+    const openTs = pos.openTimestamp || Date.now();
+    if (!pos.openTimestamp) pos.openTimestamp = Date.now();
+    const elapsedMinutes = (Date.now() - openTs) / (1000 * 60);
+
+    if (elapsedMinutes >= 12 && (!pos.dcaStep || pos.dcaStep === 0) && netPnl >= 0.15) {
+      const profitRealized = netPnl;
+      state.stats.currentTotalEquity = parseFloat((state.stats.currentTotalEquity + profitRealized).toFixed(2));
+      state.stats.totalClosedPnl = parseFloat((state.stats.totalClosedPnl + profitRealized).toFixed(2));
+      state.stats.todayClosedPnl = parseFloat((state.stats.todayClosedPnl + profitRealized).toFixed(2));
+      state.stats.totalTrades++;
+      state.stats.todayTrades++;
+
+      state.history.unshift({
+        time: new Date().toLocaleTimeString('tr-TR'),
+        symbol: sym,
+        type: prof.type,
+        side: pos.side,
+        pnl: profitRealized,
+        exitReason: `Slot Rotasyonu (+Ş${profitRealized})`
+      });
+      if (state.history.length > 50) state.history.pop();
+
+      delete state.positions[sym];
+      saveState();
+      console.log(`[🔄 SLOT ROTASYONU] ${sym} 12 dk yatayda beklediği için +$${profitRealized} ile tahliye edildi`);
+      return;
+    }
+
+    // === HIZLI DÖNÜŞLÜ DCA KADEMELERİ (%1.2 / %2.2 / %3.8) ===
+    const isShortPos = pos.side === "SHORT";
+    const entryP = pos.entryPrice;
+    const d1Target = isShortPos ? entryP * 1.012 : entryP * 0.988; // %1.2
+    const d2Target = isShortPos ? entryP * 1.022 : entryP * 0.978; // %2.2
+    const d3Target = isShortPos ? entryP * 1.038 : entryP * 0.962; // %3.8
+    const singleBatchMargin = prof.startMargin;
+
+    // DCA 1 (1.0x)
+    if ((!pos.dcaStep || pos.dcaStep === 0) && ((isShortPos && curPrice >= d1Target) || (!isShortPos && curPrice <= d1Target))) {
+      const addQty = parseFloat(((singleBatchMargin * 3) / curPrice).toFixed(4));
+      pos.totalQty = parseFloat((pos.totalQty + addQty).toFixed(4));
+      pos.totalMargin = parseFloat((pos.totalMargin + singleBatchMargin).toFixed(2));
+      pos.avgPrice = parseFloat(((pos.totalMargin * 3) / pos.totalQty).toFixed(4));
+      pos.dcaStep = 1;
+      pos.dcaCount = 1;
+      saveState();
+      console.log(`[🎯 DCA-1 (%1.2)] ${sym} -> Yeni Ort: ${pos.avgPrice}`);
+      return;
+    }
+
+    // DCA 2 (1.5x)
+    if (pos.dcaStep === 1 && ((isShortPos && curPrice >= d2Target) || (!isShortPos && curPrice <= d2Target))) {
+      const dca2Margin = singleBatchMargin * 1.5;
+      const addQty = parseFloat(((dca2Margin * 3) / curPrice).toFixed(4));
+      pos.totalQty = parseFloat((pos.totalQty + addQty).toFixed(4));
+      pos.totalMargin = parseFloat((pos.totalMargin + dca2Margin).toFixed(2));
+      pos.avgPrice = parseFloat(((pos.totalMargin * 3) / pos.totalQty).toFixed(4));
+      pos.dcaStep = 2;
+      pos.dcaCount = 2;
+      saveState();
+      console.log(`[🎯 DCA-2 (%2.2)] ${sym} -> Yeni Ort: ${pos.avgPrice}`);
+      return;
+    }
+
+    // DCA 3 (2.0x Zırh + Reversal Teyidi)
+    const isReversalConfirmed = (!isShortPos && curPrice > prevP) || (isShortPos && curPrice < prevP);
+    if (pos.dcaStep === 2 && ((isShortPos && curPrice >= d3Target) || (!isShortPos && curPrice <= d3Target)) && isReversalConfirmed) {
+      const dca3Margin = singleBatchMargin * 2;
+      const addQty = parseFloat(((dca3Margin * 3) / curPrice).toFixed(4));
+      pos.totalQty = parseFloat((pos.totalQty + addQty).toFixed(4));
+      pos.totalMargin = parseFloat((pos.totalMargin + dca3Margin).toFixed(2));
+      pos.avgPrice = parseFloat(((pos.totalMargin * 3) / pos.totalQty).toFixed(4));
+      pos.dcaStep = 3;
+      pos.dcaCount = 3;
+      saveState();
+      console.log(`[🎯 DCA-3 (%3.8 Zırh)] ${sym} -> Son Zırh Ort: ${pos.avgPrice}`);
+      return;
+    }
+
+    return;
+  }
+
+  // 2. YENİ POZİSYON AÇMA (35 Slot)
+  const activeKeys = Object.keys(state.positions);
+  if (activeKeys.length >= 35) return;
+
+  const isMajor = MAJOR_LIST.includes(sym);
+  const majorActive = activeKeys.filter(k => MAJOR_LIST.includes(k)).length;
+  const hunterActive = activeKeys.filter(k => HUNTER_LIST.includes(k)).length;
+
+  if (isMajor && majorActive >= 15) return;
+  if (!isMajor && hunterActive >= 20) return;
+
+  let signalSide = null;
+  if (ind.rsi <= prof.longRsi && ind.zScore <= prof.longZ) {
+    signalSide = "LONG";
+  } else if (ind.rsi >= prof.shortRsi && ind.zScore >= prof.shortZ) {
+    signalSide = "SHORT";
+  }
+
+  if (signalSide) {
+    const startMargin = prof.startMargin;
+    const qty = parseFloat(((startMargin * 3) / curPrice).toFixed(4));
+
+    state.positions[sym] = {
+      symbol: sym,
+      inPosition: true,
+      type: prof.type,
+      side: signalSide,
+      entryPrice: curPrice,
+      avgPrice: curPrice,
+      markPrice: curPrice,
+      totalMargin: startMargin,
+      margin: startMargin,
+      totalQty: qty,
+      leverage: 3,
+      dcaStep: 0,
+      dcaCount: 0,
+      livePnl: 0.0,
+      unrealizedPnl: 0.0,
+      openTimestamp: Date.now(),
+      openTime: new Date().toLocaleTimeString('tr-TR')
+    };
+
+    saveState();
+    console.log(`[🚀 POZİSYON AÇILDI] ${sym} (${prof.type} - $${startMargin}) | ${signalSide} 3X @ $${curPrice}`);
+  }
+}
+
+function syncTotals() {
+  let livePnl = 0;
+  let usedMargin = 0;
+
+  Object.keys(state.positions).forEach(k => {
+    const pos = state.positions[k];
+    if (pos && pos.inPosition) {
+      livePnl += Number(pos.livePnl || 0);
+      usedMargin += Number(pos.totalMargin || 0);
+    }
+  });
+
+  state.stats.liveUnrealizedPnl = parseFloat(livePnl.toFixed(2));
+  state.stats.usedMargin = parseFloat(usedMargin.toFixed(2));
+  state.stats.freeMargin = parseFloat((state.stats.currentTotalEquity - usedMargin).toFixed(2));
+
+  saveState();
+}
+
+module.exports = {
+  getState: () => state
+};

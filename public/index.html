@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FuturesX - Terminal Tablo Matrisi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .card-panel { background: #161b22; border: 1px solid #30363d; }
+    
+    /* Tek Harfli Kategori Rozetleri (M, H, B, G, L) */
+    .badge-major { background: #1f6feb22; color: #58a6ff; border: 1px solid #1f6feb; }
+    .badge-hunter { background: #8957e522; color: #bc8cff; border: 1px solid #8957e5; }
+    .badge-balon { background: #da363322; color: #f85149; border: 1px solid #da3633; }
+    .badge-gainer { background: #d2992222; color: #e3b341; border: 1px solid #d29922; }
+    .badge-loser { background: #1f88eb22; color: #38bdf8; border: 1px solid #0284c7; }
+
+    /* Kompakt L / S Rozetleri */
+    .badge-long { background: #23863622; color: #3fb950; border: 1px solid #238636; }
+    .badge-short { background: #da363322; color: #f85149; border: 1px solid #da3633; }
+    .box-cell { background: #0d1117; border: 1px solid #21262d; }
+
+    /* KÂR VURGU ARALIKLARI */
+    .pnl-tier-0 { background: rgba(46, 160, 67, 0.15); color: #7ee787; border: 1px solid rgba(46, 160, 67, 0.3); }
+    .pnl-tier-1 { background: rgba(35, 134, 54, 0.35); color: #3fb950; border: 1px solid #2ea043; font-weight: bold; }
+    .pnl-tier-2 { background: rgba(56, 139, 253, 0.25); color: #79c0ff; border: 1px solid #388bfd; font-weight: bold; }
+    .pnl-tier-3 { background: linear-gradient(90deg, rgba(163, 113, 247, 0.3), rgba(210, 153, 34, 0.3)); color: #e3b341; border: 1px solid #d29922; font-weight: 800; }
+    .pnl-tier-loss { background: rgba(218, 54, 51, 0.2); color: #f85149; border: 1px solid #da3633; }
+  </style>
+</head>
+<body class="p-2 sm:p-4 md:p-6 text-sm">
+  <div class="max-w-7xl mx-auto space-y-4">
+    
+    <!-- Üst İstatistik Kartları (5'li Düzen) -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
+      <!-- 1. Kasa Durumu -->
+      <div class="card-panel rounded-lg p-3">
+        <div class="text-xs text-gray-400">⚡ KASA DURUMU</div>
+        <div id="statEquity" class="text-xl font-bold text-sky-400 mt-1">$10,000.00</div>
+        <div class="text-[10px] text-gray-500">BNB Kalan: <b id="statBnb" class="text-amber-400">1.0000</b> (İndirimli)</div>
+      </div>
+
+      <!-- 2. Günlük Net Kâr -->
+      <div class="card-panel rounded-lg p-3">
+        <div class="text-xs text-gray-400">📅 GÜNLÜK KÂR</div>
+        <div id="statTodayClosed" class="text-xl font-bold text-emerald-400 mt-1">+$0.00</div>
+        <div class="text-[10px] text-gray-500">00:00 Sonrası Gerçekleşen</div>
+      </div>
+
+      <!-- 3. Günlük Kâr | Zarar -->
+      <div class="card-panel rounded-lg p-3">
+        <div class="text-xs text-gray-400">🏆 GÜNLÜK KÂR | ZARAR</div>
+        <div class="flex items-center gap-1.5 mt-1 text-lg font-bold">
+          <span id="statWinPnl" class="text-emerald-400">+$0.00</span>
+          <span class="text-gray-500 text-sm">/</span>
+          <span id="statLossPnl" class="text-rose-500">-$0.00</span>
+        </div>
+        <div class="text-[10px] text-gray-500">Kapatılan Kâr / Zarar</div>
+      </div>
+
+      <!-- 4. İşlem Sayısı | Ortalama Kâr -->
+      <div class="card-panel rounded-lg p-3">
+        <div class="text-xs text-gray-400">📊 İŞLEM | ORTALAMA KÂR</div>
+        <div class="flex items-baseline gap-2 mt-1">
+          <span id="statTradeCount" class="text-xl font-bold text-white">0</span>
+          <span class="text-xs text-gray-400">İşlem</span>
+          <span class="text-gray-600">|</span>
+          <span id="statAvgWin" class="text-base font-bold text-emerald-400">+$0.00</span>
+        </div>
+        <div class="text-[10px] text-gray-500">Günlük İstatistikler</div>
+      </div>
+
+      <!-- 5. Canlı PnL ve Slot Durumu -->
+      <div class="card-panel rounded-lg p-3 col-span-2 lg:col-span-1">
+        <div class="text-xs text-gray-400">🎯 CANLI PNL | SLOT DURUMU</div>
+        <div class="flex items-center justify-between gap-2 mt-1">
+          <div id="statLivePnl" class="text-2xl font-black text-emerald-400 tracking-tight">+$0.00</div>
+          <div id="statSlotBadge" class="px-2.5 py-1 text-xs font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded whitespace-nowrap">0 / 50 Slot</div>
+        </div>
+        <div class="text-[10px] text-gray-500">Açık Pozisyonlar Anlık</div>
+      </div>
+    </div>
+
+    <!-- Marjin ve 5'li Slot Havuz Bilgi Şeridi -->
+    <div class="card-panel rounded-lg p-3 flex flex-wrap items-center justify-between gap-2 text-xs">
+      <div class="flex items-center gap-4">
+        <div>💵 BOŞTA: <span id="statFree" class="text-emerald-400 font-bold">$10,000.00 USDT</span></div>
+        <div>🔒 BAĞLI: <span id="statUsed" class="text-amber-400 font-bold">$0.00 USDT</span></div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span id="badgeMajor" class="px-2 py-1 rounded badge-major font-semibold">M: 0/15</span>
+        <span id="badgeHunter" class="px-2 py-1 rounded badge-hunter font-semibold">H: 0/20</span>
+        <span id="badgeBalon" class="px-2 py-1 rounded badge-balon font-semibold">B: 0/5</span>
+        <span id="badgeGainer" class="px-2 py-1 rounded badge-gainer font-semibold">G: 0/5</span>
+        <span id="badgeLoser" class="px-2 py-1 rounded badge-loser font-semibold">L: 0/5</span>
+      </div>
+    </div>
+
+    <!-- KOMPAKT MOBİL UYUMLU TERMİNAL TABLOSU -->
+    <div class="card-panel rounded-lg p-3 sm:p-4 space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gray-800 pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-bold text-gray-200">⚡ Canlı Açık Pozisyonlar Terminali (50 Slot)</span>
+          <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold">🔥 Kâra Göre Sıralı</span>
+        </div>
+        <div class="text-xs text-gray-400">Hedef: 3X Kâr (+Ş0.70 - +Ş1.20)</div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead>
+            <tr class="text-gray-400 border-b border-gray-800 pb-2">
+              <th class="py-2">Coin</th>
+              <th class="text-center">H</th>
+              <th class="text-center">Y</th>
+              <th>Kademe</th>
+              <th>Teminat</th>
+              <th>DCA / SL Seviyeleri</th>
+              <th>Hedef (TP)</th>
+              <th class="text-right">Canlı PnL</th>
+            </tr>
+          </thead>
+          <tbody id="terminalBody" class="divide-y divide-gray-800/60 font-mono">
+            <tr><td colspan="8" class="py-6 text-center text-gray-500 font-sans">Aktif pozisyon bulunmuyor (Tüm havuzlar taranıyor...)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Kapanan İşlem Günlüğü ve Özet Bilgi Şeridi -->
+    <div class="card-panel rounded-lg p-3 sm:p-4 space-y-3">
+      <div class="text-sm font-bold text-gray-200 flex items-center justify-between">
+        <span>📜 Vadeli Kapanan İşlem Günlüğü</span>
+        <span id="historyCount" class="text-xs text-gray-400">Kayıtlı: 0 İşlem</span>
+      </div>
+
+      <!-- 7'li Özet Bilgi Şeridi -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-xs">
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Kapanan Pozisyon</div>
+          <div id="summaryClosedCount" class="font-bold text-white mt-0.5">0</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Majör (M) PnL</div>
+          <div id="summaryMajorPnl" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Avcı (H) PnL</div>
+          <div id="summaryHunterPnl" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Toplam Kâr</div>
+          <div id="summaryTotalWin" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Toplam Zarar</div>
+          <div id="summaryTotalLoss" class="font-bold text-rose-500 mt-0.5">-$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Ortalama Kâr</div>
+          <div id="summaryAvgWin" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center col-span-2 sm:col-span-1">
+          <div class="text-gray-400 text-[11px]">Ortalama Zarar</div>
+          <div id="summaryAvgLoss" class="font-bold text-rose-500 mt-0.5">-$0.00</div>
+        </div>
+      </div>
+
+      <!-- Tablo Listesi -->
+      <div class="overflow-x-auto pt-1">
+        <table class="w-full text-left text-xs">
+          <thead>
+            <tr class="text-gray-400 border-b border-gray-800 pb-2">
+              <th class="py-2">Zaman</th>
+              <th>Coin</th>
+              <th class="text-center">H</th>
+              <th class="text-center">Y</th>
+              <th>Net Kâr (USD)</th>
+              <th>Çıkış Sebebi</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody" class="divide-y divide-gray-800 font-mono">
+            <tr><td colspan="6" class="py-4 text-center text-gray-500 font-sans">Henüz kapanan işlem yok.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const TP_TARGETS = {
+      MAJOR: 1.00,
+      HUNTER: 0.85,
+      BALON: 0.70,
+      GAINER: 0.90,
+      LOSER: 0.90
+    };
+
+    function cleanSymbol(sym) {
+      if (!sym) return '';
+      return sym.endsWith('USDT') ? sym.slice(0, -4) : sym;
+    }
+
+    // Kategori Kısaltmaları (M, H, B, G, L)
+    function getTypeShort(type) {
+      if (type === 'MAJOR') return 'M';
+      if (type === 'HUNTER') return 'H';
+      if (type === 'BALON') return 'B';
+      if (type === 'GAINER') return 'G';
+      if (type === 'LOSER') return 'L';
+      return 'H';
+    }
+
+    function getTypeBadgeClass(type) {
+      if (type === 'MAJOR') return 'badge-major';
+      if (type === 'HUNTER') return 'badge-hunter';
+      if (type === 'BALON') return 'badge-balon';
+      if (type === 'GAINER') return 'badge-gainer';
+      if (type === 'LOSER') return 'badge-loser';
+      return 'badge-hunter';
+    }
+
+    function getPnlBadge(val) {
+      const p = Number(val);
+      if (p < 0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-loss">-$${Math.abs(p).toFixed(2)}</span>`;
+      if (p < 1.0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-0">+$${p.toFixed(2)}</span>`;
+      if (p < 5.0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-1">+$${p.toFixed(2)}</span>`;
+      if (p < 10.0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-2">+$${p.toFixed(2)}</span>`;
+      return `<span class="px-2.5 py-0.5 rounded text-xs pnl-tier-3">+$${p.toFixed(2)} 🚀</span>`;
+    }
+
+    async function updateDashboard() {
+      try {
+        const res = await fetch('/api/state?t=' + Date.now());
+        const data = await res.json();
+        const s = data.stats || {};
+        const c = data.counts || {};
+        const ds = data.dailySummary || {};
+        const hist = data.history || [];
+
+        // 1. Kasa Durumu ve BNB Bakiyesi
+        document.getElementById('statEquity').textContent = '$' + Number(s.currentTotalEquity || 0).toLocaleString('en-US', { minimumFractionDigits: 2 });
+        document.getElementById('statBnb').textContent = Number(s.bnbBalance || 1.0).toFixed(4);
+        
+        // 2. Günlük Net Kâr
+        const todayNetProfit = (s.todayClosedPnl !== undefined) ? s.todayClosedPnl : (ds.totalPnl || 0);
+        document.getElementById('statTodayClosed').textContent = (todayNetProfit >= 0 ? '+' : '') + '$' + Number(todayNetProfit).toFixed(2);
+        
+        // 3. Günlük Kâr / Zarar
+        const winPnl = (s.todayClosedPnl !== undefined) ? s.todayClosedPnl : (ds.totalPnl || 0);
+        const lossPnl = (ds.totalLoss !== undefined && ds.totalLoss > 0) ? ds.totalLoss : (s.todayLoss || 0);
+        document.getElementById('statWinPnl').textContent = '+' + '$' + Math.abs(Number(winPnl)).toFixed(2);
+        document.getElementById('statLossPnl').textContent = '-' + '$' + Math.abs(Number(lossPnl)).toFixed(2);
+
+        // 4. İşlem Sayısı | Ortalama Kâr
+        const tradeCount = ds.totalTrades !== undefined ? ds.totalTrades : hist.length;
+        document.getElementById('statTradeCount').textContent = tradeCount;
+        document.getElementById('statAvgWin').textContent = '+' + '$' + Number(ds.avgProfit || 0).toFixed(2);
+
+        // 5. Canlı PnL ve Slot Durumu
+        const livePnl = Number(s.liveUnrealizedPnl || 0);
+        const liveEl = document.getElementById('statLivePnl');
+        liveEl.textContent = (livePnl >= 0 ? '+' : '') + '$' + livePnl.toFixed(2);
+        liveEl.className = 'text-2xl font-black tracking-tight ' + (livePnl >= 0 ? 'text-emerald-400' : 'text-rose-500');
+        document.getElementById('statSlotBadge').textContent = (c.total || 0) + ' / ' + (c.totalLimit || 50) + ' Slot';
+
+        // Marjin ve 5 Havuz Rozeti
+        document.getElementById('statFree').textContent = '$' + Number(s.freeMargin || 0).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' USDT';
+        document.getElementById('statUsed').textContent = '$' + Number(s.usedMargin || 0).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' USDT';
+        
+        document.getElementById('badgeMajor').textContent = 'M: ' + (c.major || 0) + '/' + (c.majorLimit || 15);
+        document.getElementById('badgeHunter').textContent = 'H: ' + (c.hunter || 0) + '/' + (c.hunterLimit || 20);
+        document.getElementById('badgeBalon').textContent = 'B: ' + (c.balon || 0) + '/' + (c.balonLimit || 5);
+        document.getElementById('badgeGainer').textContent = 'G: ' + (c.gainer || 0) + '/' + (c.gainerLimit || 5);
+        document.getElementById('badgeLoser').textContent = 'L: ' + (c.loser || 0) + '/' + (c.loserLimit || 5);
+
+        // ==========================================
+        // KOMPAKT TERMİNAL TABLOSU (Kâra Göre Sıralı)
+        // ==========================================
+        const tbodyTerm = document.getElementById('terminalBody');
+        const posEntries = Object.entries(data.positions || {});
+
+        if (posEntries.length === 0) {
+          tbodyTerm.innerHTML = '<tr><td colspan="8" class="py-6 text-center text-gray-500 font-sans">Aktif pozisyon bulunmuyor (Tüm havuzlar taranıyor...)</td></tr>';
+        } else {
+          posEntries.sort((a, b) => {
+            const pnlA = Number(a[1].livePnl !== undefined ? a[1].livePnl : (a[1].unrealizedPnl || 0));
+            const pnlB = Number(b[1].livePnl !== undefined ? b[1].livePnl : (b[1].unrealizedPnl || 0));
+            return pnlB - pnlA;
+          });
+
+          tbodyTerm.innerHTML = posEntries.map(([sym, p]) => {
+            const isLong = p.side === 'LONG';
+            const live = Number(p.livePnl !== undefined ? p.livePnl : (p.unrealizedPnl || 0));
+            const pnlClass = live >= 0 ? 'text-emerald-400 font-bold' : 'text-rose-500 font-bold';
+            const sideLetter = isLong ? 'L' : 'S';
+            const sideBadge = isLong ? 'badge-long' : 'badge-short';
+            const typeShort = getTypeShort(p.type);
+            const typeBadge = getTypeBadgeClass(p.type);
+            const coinName = cleanSymbol(sym);
+
+            const entP = Number(p.entryPrice || 0);
+            const avgP = Number(p.avgPrice || entP);
+            const margin = Number(p.totalMargin || p.margin || 0);
+
+            const targetTp = TP_TARGETS[p.type] || 0.85;
+            const progressPct = Math.max(0, Math.min(100, (live / targetTp) * 100));
+
+            const d1 = isLong ? (entP * 0.988) : (entP * 1.012);
+            const sl = isLong ? (avgP * 0.950) : (avgP * 1.050);
+
+            return `
+              <tr class="hover:bg-gray-800/40 border-b border-gray-800/30 transition-colors">
+                <td class="py-2 font-bold text-white text-xs">${coinName}</td>
+                <td class="text-center"><span class="w-5 h-5 inline-flex items-center justify-center rounded text-[10px] font-bold ${typeBadge}">${typeShort}</span></td>
+                <td class="text-center"><span class="w-5 h-5 inline-flex items-center justify-center rounded text-[11px] font-bold ${sideBadge}">${sideLetter}</span></td>
+                <td><span class="text-xs ${p.dcaStep > 0 ? 'text-amber-400 font-semibold' : 'text-gray-400'}">${p.dcaStep ? 'DCA-' + p.dcaStep : '1. Giriş'}</span></td>
+                <td class="text-gray-300 font-semibold">$${margin.toFixed(1)}</td>
+                <td class="text-[11px] text-gray-400">
+                  ${p.type === 'BALON' ? '<span class="text-gray-500">DCA Yok</span>' : `<span class="text-amber-400/80">D1: $${d1.toFixed(4)}</span>`}
+                  <span class="text-rose-400/80 ml-1.5">SL: $${sl.toFixed(4)}</span>
+                </td>
+                <td class="w-24 sm:w-32">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-14 sm:w-20 bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                      <div class="h-1.5 rounded-full ${live >= 0 ? 'bg-emerald-500' : 'bg-transparent'}" style="width: ${progressPct}%"></div>
+                    </div>
+                    <span class="text-[10px] text-gray-400">%${progressPct.toFixed(0)}</span>
+                  </div>
+                </td>
+                <td class="text-right ${pnlClass} text-sm">
+                  ${live >= 0 ? '+' : ''}$${live.toFixed(2)}
+                </td>
+              </tr>
+            `;
+          }).join('');
+        }
+
+        // Kapanan İşlem Özeti (Alt Kutucuklar)
+        document.getElementById("historyCount").textContent = "Kayıtlı: " + tradeCount + " İşlem";
+        document.getElementById("summaryClosedCount").textContent = tradeCount;
+
+        const mPnl = ds.majorPnl !== undefined ? ds.majorPnl : 0;
+        const mEl = document.getElementById("summaryMajorPnl");
+        mEl.textContent = (mPnl >= 0 ? "+" : "") + "$" + mPnl.toFixed(2);
+        mEl.className = "font-bold mt-0.5 " + (mPnl >= 0 ? "text-emerald-400" : "text-rose-500");
+
+        const hPnl = ds.hunterPnl !== undefined ? ds.hunterPnl : 0;
+        const hEl = document.getElementById("summaryHunterPnl");
+        hEl.textContent = (hPnl >= 0 ? "+" : "") + "$" + hPnl.toFixed(2);
+        hEl.className = "font-bold mt-0.5 " + (hPnl >= 0 ? "text-emerald-400" : "text-rose-500");
+
+        const wEl = document.getElementById("summaryTotalWin");
+        wEl.textContent = (todayNetProfit >= 0 ? "+" : "") + "$" + Number(todayNetProfit).toFixed(2);
+        wEl.className = "font-bold mt-0.5 " + (todayNetProfit >= 0 ? "text-emerald-400" : "text-rose-500");
+
+        const tLoss = (ds.totalLoss !== undefined && ds.totalLoss > 0) ? ds.totalLoss : (s.todayLoss || 0);
+        document.getElementById("summaryTotalLoss").textContent = "-$" + Number(tLoss).toFixed(2);
+
+        const aWin = ds.avgProfit !== undefined ? ds.avgProfit : 0;
+        document.getElementById("summaryAvgWin").textContent = "+$" + Number(aWin).toFixed(2);
+
+        const aLoss = ds.avgLoss !== undefined ? ds.avgLoss : 0;
+        document.getElementById("summaryAvgLoss").textContent = "-$" + Number(aLoss).toFixed(2);
+
+        // Kapanan Tabloyu Doldur (Tek Harfli Havuz & Yön)
+        const tbodyHist = document.getElementById('historyBody');
+        if (hist.length > 0) {
+          tbodyHist.innerHTML = hist.map(h => {
+            const typeShort = getTypeShort(h.type);
+            const typeBadge = getTypeBadgeClass(h.type);
+            const sideLetter = h.side === 'LONG' ? 'L' : 'S';
+            const sideBadge = h.side === 'LONG' ? 'badge-long' : 'badge-short';
+            const coinName = cleanSymbol(h.symbol);
+
+            return `
+              <tr class="hover:bg-gray-800/40">
+                <td class="py-2 text-gray-400">${h.time}</td>
+                <td class="font-bold text-white">${coinName}</td>
+                <td class="text-center"><span class="w-5 h-5 inline-flex items-center justify-center rounded text-[10px] font-bold ${typeBadge}">${typeShort}</span></td>
+                <td class="text-center"><span class="w-5 h-5 inline-flex items-center justify-center rounded text-[11px] font-bold ${sideBadge}">${sideLetter}</span></td>
+                <td>${getPnlBadge(h.pnl)}</td>
+                <td class="text-gray-400">${h.exitReason || '3x Kâr'}</td>
+              </tr>
+            `;
+          }).join('');
+        } else {
+          tbodyHist.innerHTML = '<tr><td colspan="6" class="py-4 text-center text-gray-500 font-sans">Henüz kapanan işlem yok.</td></tr>';
+        }
+
+      } catch (err) {
+        console.error("Dashboard güncelleme hatası:", err);
+      }
+    }
+
+    setInterval(updateDashboard, 1000);
+    updateDashboard();
+  </script>
+</body>
+</html>

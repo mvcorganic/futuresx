@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FuturesX - 50 Slot Hibrit Model Matrisi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #0d1117; color: #c9d1d9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .card-panel { background: #161b22; border: 1px solid #30363d; }
+    .badge-major { background: #1f6feb22; color: #58a6ff; border: 1px solid #1f6feb; }
+    .badge-hunter { background: #8957e522; color: #bc8cff; border: 1px solid #8957e5; }
+    .badge-long { background: #23863622; color: #3fb950; border: 1px solid #238636; }
+    .badge-short { background: #da363322; color: #f85149; border: 1px solid #da3633; }
+    .box-cell { background: #0d1117; border: 1px solid #21262d; }
+
+    /* KÂR VURGU ARALIKLARI */
+    .pnl-tier-0 { background: rgba(46, 160, 67, 0.15); color: #7ee787; border: 1px solid rgba(46, 160, 67, 0.3); } /* 0 - 0.99 */
+    .pnl-tier-1 { background: rgba(35, 134, 54, 0.35); color: #3fb950; border: 1px solid #2ea043; font-weight: bold; } /* 1 - 4.99 */
+    .pnl-tier-2 { background: rgba(56, 139, 253, 0.25); color: #79c0ff; border: 1px solid #388bfd; font-weight: bold; } /* 5 - 9.99 */
+    .pnl-tier-3 { background: linear-gradient(90deg, rgba(163, 113, 247, 0.3), rgba(210, 153, 34, 0.3)); color: #e3b341; border: 1px solid #d29922; font-weight: 800; } /* 10 - 1000 */
+    .pnl-tier-loss { background: rgba(218, 54, 51, 0.2); color: #f85149; border: 1px solid #da3633; }
+  </style>
+</head>
+<body class="p-3 md:p-6 text-sm">
+  <div class="max-w-7xl mx-auto space-y-4">
+    
+    <!-- Üst İstatistik Kartları -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+      <div class="card-panel rounded-lg p-3">
+        <div class="text-xs text-gray-400">⚡ KASA DURUMU</div>
+        <div id="statEquity" class="text-xl font-bold text-sky-400 mt-1">$10,000.00</div>
+        <div class="text-[10px] text-gray-500">Ana Bakiye (1 BNB Komisyon)</div>
+      </div>
+      <div class="card-panel rounded-lg p-3">
+        <div class="text-xs text-gray-400">📅 GÜNLÜK KÂR</div>
+        <div id="statTodayClosed" class="text-xl font-bold text-emerald-400 mt-1">+$0.00</div>
+        <div class="text-[10px] text-gray-500">00:00 Sonrası Gerçekleşen</div>
+      </div>
+      <div class="card-panel rounded-lg p-3">
+        <div class="text-xs text-gray-400">🏆 TOPLAM KÂR</div>
+        <div id="statTotalClosed" class="text-xl font-bold text-emerald-400 mt-1">+$0.00</div>
+        <div class="text-[10px] text-gray-500">Kümülatif Net Kâr</div>
+      </div>
+      <div class="card-panel rounded-lg p-3">
+        <div class="text-xs text-gray-400">🛑 GÜNLÜK ZARAR | STOP</div>
+        <div id="statTodayLoss" class="text-xl font-bold text-rose-500 mt-1">-$0.00</div>
+        <div class="text-[10px] text-gray-500">Kapatılan Zarar</div>
+      </div>
+      <div class="card-panel rounded-lg p-3 col-span-2 md:col-span-1">
+        <div class="text-xs text-gray-400">🎯 CANLI PNL | SLOT DURUMU</div>
+        <div id="statLivePnl" class="text-xl font-bold text-emerald-400 mt-1">+$0.00</div>
+        <div id="statSlotBadge" class="inline-block mt-1 px-2 py-0.5 text-xs font-semibold bg-amber-500/20 text-amber-400 rounded">0 / 50 Slot</div>
+      </div>
+    </div>
+
+    <!-- Marjin Bilgi Şeridi -->
+    <div class="card-panel rounded-lg p-3 flex flex-wrap items-center justify-between gap-2 text-xs">
+      <div class="flex items-center gap-4">
+        <div>💵 BOŞTA: <span id="statFree" class="text-emerald-400 font-bold">$10,000.00 USDT</span></div>
+        <div>🔒 BAĞLI: <span id="statUsed" class="text-amber-400 font-bold">$0.00 USDT</span></div>
+        <div class="hidden md:block text-gray-400">⚙️ YAPI: 20 MAJÖR ($100) + 30 AVCI ($60) - 50 SLOT (3X)</div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="badgeMajor" class="px-2 py-1 rounded badge-major font-semibold">MAJÖR: 0/20 Aktif</span>
+        <span id="badgeHunter" class="px-2 py-1 rounded badge-hunter font-semibold">AVCI: 0/30 Aktif</span>
+        <span class="px-2 py-1 rounded bg-rose-500/10 text-rose-400 border border-rose-500/30 font-semibold">BALON: 0 (PASİF)</span>
+      </div>
+    </div>
+
+    <!-- Canlı Açık Pozisyonlar -->
+    <div>
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-sm font-bold text-gray-200">🔥 Canlı Açık Vadeli Pozisyonlar (50 Slot Kapasitesi)</div>
+        <div class="text-xs text-gray-400">Hedef: 3X Kâr (+Ş1.00 - +Ş1.45)</div>
+      </div>
+      <div id="positionGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+    </div>
+
+    <!-- Kapanan İşlem Günlüğü ve Özet Bilgi Şeridi -->
+    <div class="card-panel rounded-lg p-4 space-y-3">
+      <div class="text-sm font-bold text-gray-200 flex items-center justify-between">
+        <span>📜 Vadeli Kapanan İşlem Günlüğü</span>
+        <span id="historyCount" class="text-xs text-gray-400">Kayıtlı: 0 İşlem</span>
+      </div>
+
+      <!-- Talep Edilen 7'li Özet Bilgi Şeridi -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-xs">
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Kapanan Pozisyon</div>
+          <div id="summaryClosedCount" class="font-bold text-white mt-0.5">0</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Majör PnL</div>
+          <div id="summaryMajorPnl" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Avcı PnL</div>
+          <div id="summaryHunterPnl" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Toplam Kâr</div>
+          <div id="summaryTotalWin" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Toplam Zarar</div>
+          <div id="summaryTotalLoss" class="font-bold text-rose-500 mt-0.5">-$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center">
+          <div class="text-gray-400 text-[11px]">Ortalama Kâr</div>
+          <div id="summaryAvgWin" class="font-bold text-emerald-400 mt-0.5">+$0.00</div>
+        </div>
+        <div class="box-cell rounded p-2 text-center col-span-2 sm:col-span-1">
+          <div class="text-gray-400 text-[11px]">Ortalama Zarar</div>
+          <div id="summaryAvgLoss" class="font-bold text-rose-500 mt-0.5">-$0.00</div>
+        </div>
+      </div>
+
+      <!-- Tablo Listesi -->
+      <div class="overflow-x-auto pt-1">
+        <table class="w-full text-left text-xs">
+          <thead>
+            <tr class="text-gray-400 border-b border-gray-800 pb-2">
+              <th class="py-2">Zaman</th>
+              <th>Coin</th>
+              <th>Tür</th>
+              <th>Yön</th>
+              <th>Net Kâr (USD)</th>
+              <th>Çıkış Sebebi</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody" class="divide-y divide-gray-800">
+            <tr><td colspan="6" class="py-4 text-center text-gray-500">Henüz kapanan işlem yok.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function getPnlBadge(val) {
+      const p = Number(val);
+      if (p < 0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-loss">-$${Math.abs(p).toFixed(2)}</span>`;
+      if (p < 1.0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-0">+$${p.toFixed(2)}</span>`;
+      if (p < 5.0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-1">+$${p.toFixed(2)}</span>`;
+      if (p < 10.0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-2">+$${p.toFixed(2)}</span>`;
+      return `<span class="px-2.5 py-0.5 rounded text-xs pnl-tier-3">+$${p.toFixed(2)} 🚀</span>`;
+    }
+
+    async function updateDashboard() {
+      try {
+        const res = await fetch('/api/state?t=' + Date.now());
+        const data = await res.json();
+        const s = data.stats || {};
+        const c = data.counts || {};
+
+        document.getElementById('statEquity').textContent = '$' + Number(s.currentTotalEquity || 0).toLocaleString('en-US', { minimumFractionDigits: 2 });
+        document.getElementById('statTodayClosed').textContent = (s.todayClosedPnl >= 0 ? '+' : '') + '$' + Number(s.todayClosedPnl || 0).toFixed(2);
+        document.getElementById('statTotalClosed').textContent = (s.totalClosedPnl >= 0 ? '+' : '') + '$' + Number(s.totalClosedPnl || 0).toFixed(2);
+        document.getElementById('statTodayLoss').textContent = '-$' + Math.abs(Number(s.todayLossPnl || s.todayLoss || 0)).toFixed(2);
+        
+        const livePnl = Number(s.liveUnrealizedPnl || 0);
+        const liveEl = document.getElementById('statLivePnl');
+        liveEl.textContent = (livePnl >= 0 ? '+' : '') + '$' + livePnl.toFixed(2);
+        liveEl.className = 'text-xl font-bold mt-1 ' + (livePnl >= 0 ? 'text-emerald-400' : 'text-rose-500');
+
+        document.getElementById('statSlotBadge').textContent = (c.total || 0) + ' / ' + (c.totalLimit || 35) + ' Slot';
+        document.getElementById('statFree').textContent = '$' + Number(s.freeMargin || 0).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' USDT';
+        document.getElementById('statUsed').textContent = '$' + Number(s.usedMargin || 0).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' USDT';
+
+        document.getElementById('badgeMajor').textContent = 'MAJÖR: ' + (c.major || 0) + '/' + (c.majorLimit || 15) + ' Aktif';
+        document.getElementById('badgeHunter').textContent = 'AVCI: ' + (c.hunter || 0) + '/' + (c.hunterLimit || 20) + ' Aktif';
+
+        const grid = document.getElementById('positionGrid');
+        const posKeys = Object.keys(data.positions || {});
+        
+        if (posKeys.length === 0) {
+          grid.innerHTML = '<div class="col-span-full card-panel rounded-lg p-8 text-center text-gray-500">Aktif pozisyon bulunmuyor (Sinyaller taranıyor...)</div>';
+        } else {
+          grid.innerHTML = posKeys.map(k => {
+            const p = data.positions[k];
+            const isLong = p.side === 'LONG';
+            const live = Number(p.livePnl !== undefined ? p.livePnl : (p.unrealizedPnl || 0));
+            const pnlClass = live >= 0 ? 'text-emerald-400' : 'text-rose-500';
+            const borderClass = live >= 0 ? 'border-emerald-500/30' : 'border-rose-500/30';
+            const sideBadge = isLong ? 'badge-long' : 'badge-short';
+            const typeBadge = p.type === 'MAJOR' ? 'badge-major' : 'badge-hunter';
+
+            const curP = Number(p.curPrice || p.markPrice || 0);
+            const entP = Number(p.entryPrice || 0);
+            const avgP = Number(p.avgPrice || entP);
+            const margin = Number(p.totalMargin || p.margin || 0);
+
+            const d1 = isLong ? (entP * 0.988) : (entP * 1.012);
+            const d2 = isLong ? (entP * 0.978) : (entP * 1.022);
+            const sl = isLong ? (avgP * 0.950) : (avgP * 1.050);
+
+            return `
+              <div class="card-panel rounded-lg p-3.5 border ${borderClass} flex flex-col justify-between space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-white text-base">${p.symbol}</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded font-semibold ${typeBadge}">${p.type}</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs px-2 py-0.5 rounded font-bold ${sideBadge}">${p.side} 3X</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between text-[11px] text-gray-400 border-b border-gray-800 pb-2">
+                  <span>Kademe: <b class="text-amber-400">${p.dcaStep ? 'DCA-' + p.dcaStep : '1. GİRİŞ'}</b></span>
+                  <span>Teminat: <b class="text-gray-200">$${margin.toFixed(1)}</b></span>
+                </div>
+
+                <div class="grid grid-cols-3 gap-1.5 text-center text-[10px]">
+                  <div class="box-cell rounded p-1.5">
+                    <div class="text-gray-500">GİRİŞ</div>
+                    <div class="font-bold text-sky-400 text-xs mt-0.5">$${entP.toFixed(4)}</div>
+                  </div>
+                  <div class="box-cell rounded p-1.5">
+                    <div class="text-gray-500">GÜNCEL</div>
+                    <div class="font-bold text-white text-xs mt-0.5">$${curP.toFixed(4)}</div>
+                  </div>
+                  <div class="box-cell rounded p-1.5">
+                    <div class="text-gray-500">ORTALAMA</div>
+                    <div class="font-bold text-amber-400 text-xs mt-0.5">$${avgP.toFixed(4)}</div>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-1.5 text-center text-[9px] text-gray-400">
+                  <div class="box-cell rounded p-1 ${p.dcaStep >= 1 ? 'border-amber-500/50 text-amber-400' : ''}">
+                    <div>DCA 1</div>
+                    <div>$${d1.toFixed(4)}</div>
+                  </div>
+                  <div class="box-cell rounded p-1 ${p.dcaStep >= 2 ? 'border-amber-500/50 text-amber-400' : ''}">
+                    <div>DCA 2</div>
+                    <div>$${d2.toFixed(4)}</div>
+                  </div>
+                  <div class="box-cell rounded p-1 text-rose-400 border-rose-500/20">
+                    <div>STOP LOSS</div>
+                    <div>$${sl.toFixed(4)}</div>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-1 border-t border-gray-800 text-xs">
+                  <div class="text-[10px] text-gray-500">
+                    Dip: <span class="text-rose-400">$${(p.minPnl || 0).toFixed(2)}</span> | Zirve: <span class="text-emerald-400">+$${(p.maxPnl || 0).toFixed(2)}</span>
+                  </div>
+                  <div class="font-bold ${pnlClass} text-sm">
+                    ${live >= 0 ? '+' : ''}$${live.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // Kapanan İşlemler ve 7'li Özet Bilgi Hesabı
+        const hist = data.history || [];
+        document.getElementById('historyCount').textContent = 'Kayıtlı: ' + hist.length + ' İşlem';
+
+        let majorPnl = 0, hunterPnl = 0;
+        let totalWin = 0, totalLoss = 0;
+        let winCount = 0, lossCount = 0;
+
+        const majorPrefixes = ['BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'DOGE', 'ADA', 'SUI', 'AVAX', 'NEAR', 'LINK', 'XLM', 'LTC', 'DOT', 'UNI'];
+
+        hist.forEach(h => {
+          const val = Number(h.pnl || 0);
+          const isMajor = h.type === 'MAJOR' || majorPrefixes.some(pref => (h.symbol || '').startsWith(pref));
+
+          if (isMajor) majorPnl += val;
+          else hunterPnl += val;
+
+          if (val >= 0) {
+            totalWin += val;
+            winCount++;
+          } else {
+            totalLoss += Math.abs(val);
+            lossCount++;
+          }
+        });
+
+        const avgWin = winCount > 0 ? (totalWin / winCount) : 0;
+        const avgLoss = lossCount > 0 ? (totalLoss / lossCount) : 0;
+
+        // Özet Kutucuklarını Güncelle
+        document.getElementById('summaryClosedCount').textContent = hist.length;
+        
+        const majEl = document.getElementById('summaryMajorPnl');
+        majEl.textContent = (majorPnl >= 0 ? '+' : '') + '$' + majorPnl.toFixed(2);
+        majEl.className = 'font-bold mt-0.5 ' + (majorPnl >= 0 ? 'text-emerald-400' : 'text-rose-500');
+
+        const huntEl = document.getElementById('summaryHunterPnl');
+        huntEl.textContent = (hunterPnl >= 0 ? '+' : '') + '$' + hunterPnl.toFixed(2);
+        huntEl.className = 'font-bold mt-0.5 ' + (hunterPnl >= 0 ? 'text-emerald-400' : 'text-rose-500');
+
+        document.getElementById('summaryTotalWin').textContent = '+$' + totalWin.toFixed(2);
+        document.getElementById('summaryTotalLoss').textContent = '-$' + totalLoss.toFixed(2);
+        document.getElementById('summaryAvgWin').textContent = '+$' + avgWin.toFixed(2);
+        document.getElementById('summaryAvgLoss').textContent = '-$' + avgLoss.toFixed(2);
+
+        // Tabloyu Yazdır
+        const tbody = document.getElementById('historyBody');
+        if (hist.length > 0) {
+          tbody.innerHTML = hist.slice(0, 20).map(h => {
+            const isMajor = h.type === 'MAJOR' || majorPrefixes.some(pref => (h.symbol || '').startsWith(pref));
+            const coinType = isMajor ? 'MAJOR' : 'HUNTER';
+            const typeBadge = isMajor ? 'badge-major' : 'badge-hunter';
+
+            return `
+              <tr class="hover:bg-gray-800/40">
+                <td class="py-2 text-gray-400">${h.time}</td>
+                <td class="font-bold text-white">${h.symbol}</td>
+                <td><span class="px-1.5 py-0.5 rounded text-[10px] font-semibold ${typeBadge}">${coinType}</span></td>
+                <td><span class="px-1.5 py-0.5 rounded text-[10px] font-bold ${h.side === 'LONG' ? 'badge-long' : 'badge-short'}">${h.side}</span></td>
+                <td>${getPnlBadge(h.pnl)}</td>
+                <td class="text-gray-400">${h.exitReason || '3x Kâr'}</td>
+              </tr>
+            `;
+          }).join('');
+        }
+
+      } catch (err) {}
+    }
+
+    setInterval(updateDashboard, 1000);
+    updateDashboard();
+  </script>
+</body>
+</html>
