@@ -460,6 +460,16 @@
         const elSumLoss = document.getElementById('summaryTotalLoss');
         const elSumNet = document.getElementById('summaryTotalNet');
 
+        // 4. Ortalama Net Kâr = Net Kâr / İşlem Sayısı
+        const elTradeCount = document.getElementById('statTradeCount');
+        const elAvgWin = document.getElementById('statAvgWin');
+        if (elAvgWin) {
+            const countVal = elTradeCount ? (parseInt(elTradeCount.textContent) || 0) : 0;
+            const avgVal = countVal > 0 ? (totalPoolNet / countVal) : 0;
+            elAvgWin.textContent = (avgVal >= 0 ? '+' : '-') + '$' + Math.abs(avgVal).toFixed(2);
+            elAvgWin.className = "text-base font-bold " + (avgVal >= 0 ? "text-emerald-400" : "text-rose-400");
+        }
+
         if (elSumWin) elSumWin.textContent = '+$' + totalPoolWin.toFixed(2);
         if (elSumLoss) elSumLoss.textContent = '-$' + Math.abs(totalPoolLoss).toFixed(2);
         if (elSumNet) {
@@ -477,6 +487,15 @@
         }
 
         const elHeaderNet = document.getElementById('statTodayClosed');
+
+        // 4. Ortalama Kâr (Net Kâr / Toplam İşlem Sayısı)
+        const totalTradesCount = Number(s.totalTrades || (ds.totalTrades || (state.history ? state.history.length : 0)));
+        const accurateAvgProfit = totalTradesCount > 0 ? (totalPoolNet / totalTradesCount) : 0;
+        const elAvgProfit = document.getElementById('statAvgProfit');
+        if (elAvgProfit) {
+            elAvgProfit.textContent = (accurateAvgProfit >= 0 ? '+' : '-') + '$' + Math.abs(accurateAvgProfit).toFixed(2);
+            elAvgProfit.className = accurateAvgProfit >= 0 ? "text-emerald-400" : "text-rose-400";
+        }
         if (elHeaderNet) {
             elHeaderNet.textContent = (totalPoolNet >= 0 ? '+' : '-') + '$' + Math.abs(totalPoolNet).toFixed(2);
             elHeaderNet.className = "text-xl font-bold mt-1 " + (totalPoolNet >= 0 ? "text-emerald-400" : "text-rose-400");
