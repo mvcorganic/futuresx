@@ -1,6 +1,4 @@
 module.exports = {
-  ROTATION_MIN_PNL: 0.65,
-  ENTRY_DELTA_PERCENT: 0.15,
   PORT: 3001,
   POLL_INTERVAL: 1000,
   SCANNER_INTERVAL_MS: 60000, // 60 saniyede bir Gainers/Losers ve Hacimli Balon taraması

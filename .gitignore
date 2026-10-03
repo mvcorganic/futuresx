@@ -1,4 +1,4 @@
 node_modules/
-*.tar.gz
+npm-debug.log
 .DS_Store
-npm-debug.log*
+logs/*.log

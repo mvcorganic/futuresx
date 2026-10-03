@@ -317,7 +317,7 @@ function processPositions(pMap) {
 
     // 2. Slot Rotasyonu (Süre aşımı veya kâr koruma)
     const elapsedSec = (now - pos.startTime) / 1000;
-    if (elapsedSec >= tier.ROTATION_TIMEOUT_SEC && livePnl >= tier.ROTATION_TP_USD) {
+    if (elapsedSec >= tier.ROTATION_TIMEOUT_SEC && livePnl >= 0.65) {
       closePosition(sym, livePnl, `Slot Rotasyonu (+$${livePnl.toFixed(2)})`);
       continue;
     }
