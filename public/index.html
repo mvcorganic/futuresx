@@ -43,14 +43,14 @@
 
       <!-- 2. Günlük Net Kâr -->
       <div class="card-panel rounded-lg p-3">
-        <div class="text-xs text-gray-400">📅 GÜNLÜK KÂR</div>
+        <div class="text-xs text-gray-400">📅 GÜNLÜK NET KÂR</div>
         <div id="statTodayClosed" class="text-xl font-bold text-emerald-400 mt-1">+$0.00</div>
         <div class="text-[10px] text-gray-500">00:00 Sonrası Gerçekleşen</div>
       </div>
 
       <!-- 3. Günlük Kâr | Zarar -->
       <div class="card-panel rounded-lg p-3">
-        <div class="text-xs text-gray-400">🏆 GÜNLÜK KÂR | ZARAR</div>
+        <div class="text-xs text-gray-400">🏆 BRÜT KÂR | ZARAR</div>
         <div class="flex items-center gap-1.5 mt-1 text-lg font-bold">
           <span id="statWinPnl" class="text-emerald-400">+$0.00</span>
           <span class="text-gray-500 text-sm">/</span>
@@ -203,7 +203,28 @@
         </div>
       </div>
 
-      <!-- Tablo Listesi -->
+      <!-- TOPLAM KÂR | TOPLAM ZARAR | NET ŞERİDİ -->
+    <div class="flex items-center justify-between bg-gray-900/80 border border-gray-800 rounded-lg px-4 py-2 text-xs font-mono">
+        <span class="text-gray-400 font-sans font-semibold">Toplam Gerçekleşen Sonuç:</span>
+        <div class="flex items-center gap-4">
+            <div>
+                <span class="text-gray-500 mr-1">Toplam Kâr:</span>
+                <span id="summaryTotalWin" class="text-emerald-400 font-bold">+$0.00</span>
+            </div>
+            <span class="text-gray-700">|</span>
+            <div>
+                <span class="text-gray-500 mr-1">Toplam Zarar:</span>
+                <span id="summaryTotalLoss" class="text-rose-500 font-bold">-$0.00</span>
+            </div>
+            <span class="text-gray-700">|</span>
+            <div>
+                <span class="text-gray-500 mr-1">Net Sonuç:</span>
+                <span id="summaryTotalNet" class="text-emerald-400 font-bold">+$0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tablo Listesi -->
       <div class="overflow-x-auto pt-1">
         <table class="w-full text-left text-xs">
           <thead>
@@ -280,7 +301,9 @@
         document.getElementById('statBnb').textContent = Number(s.bnbBalance || 1.0).toFixed(4);
         
         // 2. Günlük Net Kâr
-        const todayNetProfit = (s.todayClosedPnl !== undefined) ? s.todayClosedPnl : (ds.totalPnl || 0);
+        const winVal = (s.todayClosedPnl !== undefined) ? s.todayClosedPnl : (ds.totalPnl || 0);
+        const lossVal = (ds.totalLoss !== undefined && ds.totalLoss > 0) ? ds.totalLoss : (s.todayLoss || 0);
+        const todayNetProfit = winVal - lossVal;
         document.getElementById('statTodayClosed').textContent = (todayNetProfit >= 0 ? '+' : '') + '$' + Number(todayNetProfit).toFixed(2);
         
         // 3. Günlük Kâr / Zarar
@@ -423,6 +446,41 @@
         document.getElementById("winLoser").textContent = "+$" + poolStats.LOSER.win.toFixed(2);
         document.getElementById("lossLoser").textContent = "-$" + poolStats.LOSER.loss.toFixed(2);
         document.getElementById("countLoser").textContent = poolStats.LOSER.count + " İşlem";
+
+        // 5 Havuzun Toplam Kâr, Zarar ve Net Değerlerini Hesaplayıp Şeride Basma
+        const totalPoolWin = (poolStats.MAJOR.win || 0) + (poolStats.HUNTER.win || 0) + (poolStats.BALON.win || 0) + (poolStats.GAINER.win || 0) + (poolStats.LOSER.win || 0);
+        const totalPoolLoss = (poolStats.MAJOR.loss || 0) + (poolStats.HUNTER.loss || 0) + (poolStats.BALON.loss || 0) + (poolStats.GAINER.loss || 0) + (poolStats.LOSER.loss || 0);
+        const totalPoolNet = totalPoolWin - totalPoolLoss;
+
+        // BRÜT KÂR KUTUSUNU DA 5 HAVUZUN GERÇEK BRÜTÜNE EŞİTLEME
+        const elStatWin = document.getElementById('statWinPnl');
+        if (elStatWin) elStatWin.textContent = '+$' + totalPoolWin.toFixed(2);
+
+        const elSumWin = document.getElementById('summaryTotalWin');
+        const elSumLoss = document.getElementById('summaryTotalLoss');
+        const elSumNet = document.getElementById('summaryTotalNet');
+
+        if (elSumWin) elSumWin.textContent = '+$' + totalPoolWin.toFixed(2);
+        if (elSumLoss) elSumLoss.textContent = '-$' + Math.abs(totalPoolLoss).toFixed(2);
+        if (elSumNet) {
+            elSumNet.textContent = (totalPoolNet >= 0 ? '+' : '-') + '$' + Math.abs(totalPoolNet).toFixed(2);
+            elSumNet.className = "font-bold " + (totalPoolNet >= 0 ? "text-emerald-400" : "text-rose-500");
+        }
+
+        // TEPE KARTLARI HAVUZ TOPLAMLARIYLA EŞİTLEME (10.000 + Net Kâr + Canlı PnL)
+        const livePnlNow = Number(s.liveUnrealizedPnl || 0);
+        const finalCalculatedEquity = 10000.00 + totalPoolNet + livePnlNow;
+
+        const elHeaderEquity = document.getElementById('stateEquity');
+        if (elHeaderEquity) {
+            elHeaderEquity.textContent = '$' + finalCalculatedEquity.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        const elHeaderNet = document.getElementById('statTodayClosed');
+        if (elHeaderNet) {
+            elHeaderNet.textContent = (totalPoolNet >= 0 ? '+' : '-') + '$' + Math.abs(totalPoolNet).toFixed(2);
+            elHeaderNet.className = "text-xl font-bold mt-1 " + (totalPoolNet >= 0 ? "text-emerald-400" : "text-rose-400");
+        }
 
         // Kapanan Tablo Listesi
         const tbodyHist = document.getElementById('historyBody');
