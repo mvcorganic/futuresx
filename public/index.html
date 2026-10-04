@@ -89,11 +89,11 @@
         <div>🔒 BAĞLI: <span id="statUsed" class="text-amber-400 font-bold">$0.00 USDT</span></div>
       </div>
       <div class="flex flex-wrap items-center gap-2">
-        <span id="badgeMajor" class="px-2 py-1 rounded badge-major font-semibold">M: 0/15</span>
+        <span id="badgeMajor" class="px-2 py-1 rounded badge-major font-semibold">M: 0/10</span>
         <span id="badgeHunter" class="px-2 py-1 rounded badge-hunter font-semibold">H: 0/20</span>
-        <span id="badgeBalon" class="px-2 py-1 rounded badge-balon font-semibold">B: 0/5</span>
-        <span id="badgeGainer" class="px-2 py-1 rounded badge-gainer font-semibold">G: 0/5</span>
-        <span id="badgeLoser" class="px-2 py-1 rounded badge-loser font-semibold">L: 0/5</span>
+        <span id="badgeBalon" class="hidden px-2 py-1 rounded badge-balon font-semibold">B: 0/0</span>
+        <span id="badgeGainer" class="px-2 py-1 rounded badge-gainer font-semibold">G: 0/20</span>
+        <span id="badgeLoser" class="hidden px-2 py-1 rounded badge-loser font-semibold">L: 0/0</span>
       </div>
     </div>
 
@@ -107,8 +107,9 @@
         <div class="text-xs text-gray-400">Hedef: 3X Kâr (+Ş0.70 - +Ş1.20)</div>
       </div>
 
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs">
+      <div class="overflow-x-auto max-h-[520px] overflow-y-auto rounded-lg border border-gray-800/80 pr-1">
+        <div class="max-h-[500px] overflow-y-auto border border-gray-800/80 rounded-lg pr-1">
+<table class="w-full text-left text-xs">
           <thead>
             <tr class="text-gray-400 border-b border-gray-800 pb-2">
               <th class="py-2">Coin</th>
@@ -125,6 +126,7 @@
             <tr><td colspan="8" class="py-6 text-center text-gray-500 font-sans">Aktif pozisyon bulunmuyor (Tüm havuzlar taranıyor...)</td></tr>
           </tbody>
         </table>
+</div>
       </div>
     </div>
 
@@ -147,6 +149,10 @@
             <span id="winMajor" class="text-emerald-400">+$0.00</span>
             <span class="text-gray-600 font-normal">|</span>
             <span id="lossMajor" class="text-rose-500">-$0.00</span>
+            </div>
+            <div class="mt-1 flex items-center justify-between text-[11px] text-gray-400 border-t border-gray-800/60 pt-1 font-mono">
+                <span>Ort:</span>
+                <span id="avgMajor" class="font-bold text-gray-300">$0.00</span>
           </div>
         </div>
 
@@ -160,6 +166,10 @@
             <span id="winHunter" class="text-emerald-400">+$0.00</span>
             <span class="text-gray-600 font-normal">|</span>
             <span id="lossHunter" class="text-rose-500">-$0.00</span>
+            </div>
+            <div class="mt-1 flex items-center justify-between text-[11px] text-gray-400 border-t border-gray-800/60 pt-1 font-mono">
+                <span>Ort:</span>
+                <span id="avgHunter" class="font-bold text-gray-300">$0.00</span>
           </div>
         </div>
 
@@ -173,6 +183,10 @@
             <span id="winBalon" class="text-emerald-400">+$0.00</span>
             <span class="text-gray-600 font-normal">|</span>
             <span id="lossBalon" class="text-rose-500">-$0.00</span>
+            </div>
+            <div class="mt-1 flex items-center justify-between text-[11px] text-gray-400 border-t border-gray-800/60 pt-1 font-mono">
+                <span>Ort:</span>
+                <span id="avgBalon" class="font-bold text-gray-300">$0.00</span>
           </div>
         </div>
 
@@ -186,6 +200,10 @@
             <span id="winGainer" class="text-emerald-400">+$0.00</span>
             <span class="text-gray-600 font-normal">|</span>
             <span id="lossGainer" class="text-rose-500">-$0.00</span>
+            </div>
+            <div class="mt-1 flex items-center justify-between text-[11px] text-gray-400 border-t border-gray-800/60 pt-1 font-mono">
+                <span>Ort:</span>
+                <span id="avgGainer" class="font-bold text-gray-300">$0.00</span>
           </div>
         </div>
 
@@ -199,6 +217,10 @@
             <span id="winLoser" class="text-emerald-400">+$0.00</span>
             <span class="text-gray-600 font-normal">|</span>
             <span id="lossLoser" class="text-rose-500">-$0.00</span>
+            </div>
+            <div class="mt-1 flex items-center justify-between text-[11px] text-gray-400 border-t border-gray-800/60 pt-1 font-mono">
+                <span>Ort:</span>
+                <span id="avgLoser" class="font-bold text-gray-300">$0.00</span>
           </div>
         </div>
       </div>
@@ -225,7 +247,8 @@
     </div>
 
     <!-- Tablo Listesi -->
-      <div class="overflow-x-auto pt-1">
+      <div id="closedTradesContainer" class="max-h-[500px] overflow-y-auto overflow-x-auto border border-gray-800/80 rounded-lg pr-1 custom-scroll">
+<div class="overflow-x-auto pt-1">
         <table class="w-full text-left text-xs">
           <thead>
             <tr class="text-gray-400 border-b border-gray-800 pb-2">
@@ -242,12 +265,13 @@
           </tbody>
         </table>
       </div>
+</div>
     </div>
 
   </div>
 
   <script>
-    const TP_TARGETS = {
+    var TP_TARGETS = {
       MAJOR: 1.00,
       HUNTER: 0.85,
       BALON: 0.70,
@@ -279,7 +303,7 @@
     }
 
     function getPnlBadge(val) {
-      const p = Number(val);
+      var p = Number(val);
       if (p < 0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-loss">-$${Math.abs(p).toFixed(2)}</span>`;
       if (p < 1.0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-0">+$${p.toFixed(2)}</span>`;
       if (p < 5.0) return `<span class="px-2 py-0.5 rounded text-xs pnl-tier-1">+$${p.toFixed(2)}</span>`;
@@ -289,37 +313,70 @@
 
     async function updateDashboard() {
       try {
-        const res = await fetch('/api/state?t=' + Date.now());
-        const data = await res.json();
-        const s = data.stats || {};
-        const c = data.counts || {};
-        const ds = data.dailySummary || {};
-        const hist = data.history || [];
+        var res = await fetch('/api/state?t=' + Date.now());
+        var data = await res.json();
+        var s = data.stats || {};
+        var c = data.counts || {};
+        var ds = data.dailySummary || {};
+        var hist = data.history || [];
 
         // 1. Kasa Durumu ve BNB Bakiyesi
         document.getElementById('statEquity').textContent = '$' + Number(s.currentTotalEquity || 0).toLocaleString('en-US', { minimumFractionDigits: 2 });
         document.getElementById('statBnb').textContent = Number(s.bnbBalance || 1.0).toFixed(4);
         
         // 2. Günlük Net Kâr
-        const winVal = (s.todayClosedPnl !== undefined) ? s.todayClosedPnl : (ds.totalPnl || 0);
-        const lossVal = (ds.totalLoss !== undefined && ds.totalLoss > 0) ? ds.totalLoss : (s.todayLoss || 0);
-        const todayNetProfit = winVal - lossVal;
+        var winVal = (s.todayClosedPnl !== undefined) ? s.todayClosedPnl : (ds.totalPnl || 0);
+        var lossVal = (ds.totalLoss !== undefined && ds.totalLoss > 0) ? ds.totalLoss : (s.todayLoss || 0);
+        var todayNetProfit = winVal - lossVal;
         document.getElementById('statTodayClosed').textContent = (todayNetProfit >= 0 ? '+' : '') + '$' + Number(todayNetProfit).toFixed(2);
         
         // 3. Günlük Kâr / Zarar
-        const winPnl = (s.todayClosedPnl !== undefined) ? s.todayClosedPnl : (ds.totalPnl || 0);
-        const lossPnl = (ds.totalLoss !== undefined && ds.totalLoss > 0) ? ds.totalLoss : (s.todayLoss || 0);
-        document.getElementById('statWinPnl').textContent = '+' + '$' + Math.abs(Number(winPnl)).toFixed(2);
-        document.getElementById('statLossPnl').textContent = '-' + '$' + Math.abs(Number(lossPnl)).toFixed(2);
+        var winPnl = (s.todayClosedPnl !== undefined) ? s.todayClosedPnl : (ds.totalPnl || 0);
+        var lossPnl = (ds.totalLoss !== undefined && ds.totalLoss > 0) ? ds.totalLoss : (s.todayLoss || 0);
+        // document.getElementById('statWinPnl') ezildi
+        // document.getElementById('statLossPnl') ezildi
 
-        // 4. İşlem Sayısı | Ortalama Kâr
-        const tradeCount = ds.totalTrades !== undefined ? ds.totalTrades : hist.length;
-        document.getElementById('statTradeCount').textContent = tradeCount;
-        document.getElementById('statAvgWin').textContent = '+' + '$' + Number(ds.avgProfit || 0).toFixed(2);
+        // 4. İşlem Sayısı | Ortalama Kâr (TAMAMEN GÜNLÜK HESAPLAMA)
+        var dGross = 0, dLoss = 0, dTrades = 0;
+        var listToUse = (s.history && s.history.length > 0) ? s.history : [];
+
+        listToUse.forEach(item => {
+            var p = parseFloat(item.pnl !== undefined ? item.pnl : (item.netProfit || item.netPnl || 0));
+            if (!isNaN(p)) {
+                dTrades++;
+                if (p >= 0) dGross += p;
+                else dLoss += Math.abs(p);
+            }
+        });
+
+        var dNet = dGross - dLoss;
+        var dAvg = dTrades > 0 ? (dNet / dTrades) : 0;
+
+        // Kartları Güncelle
+        var elTrades = document.getElementById('statTradeCount');
+        if (elTrades) elTrades.textContent = dTrades;
+
+        var elAvg = document.getElementById('statAvgWin');
+        if (elAvg) {
+            elAvg.textContent = (dAvg >= 0 ? '+' : '-') + '$' + Math.abs(dAvg).toFixed(2);
+            elAvg.className = (dAvg >= 0 ? 'text-emerald-400' : 'text-rose-400') + ' text-base font-bold';
+        }
+
+        var elW = document.getElementById('statWinPnl') || document.getElementById('statGrossProfit');
+        if (elW) elW.textContent = '+$' + dGross.toFixed(2);
+
+        var elL = document.getElementById('statLossPnl') || document.getElementById('statGrossLoss');
+        if (elL) elL.textContent = '-$' + dLoss.toFixed(2);
+
+        var elDaily = document.getElementById('statDailyNet');
+        if (elDaily) {
+            elDaily.textContent = (dNet >= 0 ? '+' : '-') + '$' + Math.abs(dNet).toFixed(2);
+            elDaily.className = (dNet >= 0 ? 'text-emerald-400' : 'text-rose-400') + ' font-bold';
+        }
 
         // 5. Canlı PnL ve Slot Durumu
-        const livePnl = Number(s.liveUnrealizedPnl || 0);
-        const liveEl = document.getElementById('statLivePnl');
+        var livePnl = Number(s.liveUnrealizedPnl || 0);
+        var liveEl = document.getElementById('statLivePnl');
         liveEl.textContent = (livePnl >= 0 ? '+' : '') + '$' + livePnl.toFixed(2);
         liveEl.className = 'text-2xl font-black tracking-tight ' + (livePnl >= 0 ? 'text-emerald-400' : 'text-rose-500');
         document.getElementById('statSlotBadge').textContent = (c.total || 0) + ' / ' + (c.totalLimit || 50) + ' Slot';
@@ -328,46 +385,50 @@
         document.getElementById('statFree').textContent = '$' + Number(s.freeMargin || 0).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' USDT';
         document.getElementById('statUsed').textContent = '$' + Number(s.usedMargin || 0).toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' USDT';
         
-        document.getElementById('badgeMajor').textContent = 'M: ' + (c.major || 0) + '/' + (c.majorLimit || 15);
-        document.getElementById('badgeHunter').textContent = 'H: ' + (c.hunter || 0) + '/' + (c.hunterLimit || 20);
-        document.getElementById('badgeBalon').textContent = 'B: ' + (c.balon || 0) + '/' + (c.balonLimit || 5);
-        document.getElementById('badgeGainer').textContent = 'G: ' + (c.gainer || 0) + '/' + (c.gainerLimit || 5);
-        document.getElementById('badgeLoser').textContent = 'L: ' + (c.loser || 0) + '/' + (c.loserLimit || 5);
+        document.getElementById('badgeMajor').textContent = 'M: ' + (c.major || 0) + '/' + (c.majorLimit !== undefined ? c.majorLimit : 10);
+        document.getElementById('badgeHunter').textContent = 'H: ' + (c.hunter || 0) + '/' + (c.hunterLimit !== undefined ? c.hunterLimit : 20);
+        document.getElementById('badgeGainer').textContent = 'G: ' + (c.gainer || 0) + '/' + (c.gainerLimit !== undefined ? c.gainerLimit : 20);
+        var elB = document.getElementById('badgeBalon');
+        var elL = document.getElementById('badgeLoser');
+        if (elB) elB.style.display = (c.balonLimit > 0 || c.balon > 0) ? 'inline-block' : 'none';
+        if (elL) elL.style.display = (c.loserLimit > 0 || c.loser > 0) ? 'inline-block' : 'none';
+        if (elB && elB.style.display !== 'none') elB.textContent = 'B: ' + (c.balon || 0) + '/' + (c.balonLimit || 0);
+        if (elL && elL.style.display !== 'none') elL.textContent = 'L: ' + (c.loser || 0) + '/' + (c.loserLimit || 0);
 
         // ==========================================
         // KOMPAKT TERMİNAL TABLOSU (Kâra Göre Sıralı)
         // ==========================================
-        const tbodyTerm = document.getElementById('terminalBody');
-        const posEntries = Object.entries(data.positions || {});
+        var tbodyTerm = document.getElementById('terminalBody');
+        var posEntries = Object.entries(data.positions || {});
 
         if (posEntries.length === 0) {
           tbodyTerm.innerHTML = '<tr><td colspan="8" class="py-6 text-center text-gray-500 font-sans">Aktif pozisyon bulunmuyor (Tüm havuzlar taranıyor...)</td></tr>';
         } else {
           posEntries.sort((a, b) => {
-            const pnlA = Number(a[1].livePnl !== undefined ? a[1].livePnl : (a[1].unrealizedPnl || 0));
-            const pnlB = Number(b[1].livePnl !== undefined ? b[1].livePnl : (b[1].unrealizedPnl || 0));
+            var pnlA = Number(a[1].livePnl !== undefined ? a[1].livePnl : (a[1].unrealizedPnl || 0));
+            var pnlB = Number(b[1].livePnl !== undefined ? b[1].livePnl : (b[1].unrealizedPnl || 0));
             return pnlB - pnlA;
           });
 
           tbodyTerm.innerHTML = posEntries.map(([sym, p]) => {
-            const isLong = p.side === 'LONG';
-            const live = Number(p.livePnl !== undefined ? p.livePnl : (p.unrealizedPnl || 0));
-            const pnlClass = live >= 0 ? 'text-emerald-400 font-bold' : 'text-rose-500 font-bold';
-            const sideLetter = isLong ? 'L' : 'S';
-            const sideBadge = isLong ? 'badge-long' : 'badge-short';
-            const typeShort = getTypeShort(p.type);
-            const typeBadge = getTypeBadgeClass(p.type);
-            const coinName = cleanSymbol(sym);
+            var isLong = p.side === 'LONG';
+            var live = Number(p.livePnl !== undefined ? p.livePnl : (p.unrealizedPnl || 0));
+            var pnlClass = live >= 0 ? 'text-emerald-400 font-bold' : 'text-rose-500 font-bold';
+            var sideLetter = isLong ? 'L' : 'S';
+            var sideBadge = isLong ? 'badge-long' : 'badge-short';
+            var typeShort = getTypeShort(p.type);
+            var typeBadge = getTypeBadgeClass(p.type);
+            var coinName = cleanSymbol(sym);
 
-            const entP = Number(p.entryPrice || 0);
-            const avgP = Number(p.avgPrice || entP);
-            const margin = Number(p.totalMargin || p.margin || 0);
+            var entP = Number(p.entryPrice || 0);
+            var avgP = Number(p.avgPrice || entP);
+            var margin = Number(p.totalMargin || p.margin || 0);
 
-            const targetTp = TP_TARGETS[p.type] || 0.85;
-            const progressPct = Math.max(0, Math.min(100, (live / targetTp) * 100));
+            var targetTp = TP_TARGETS[p.type] || 0.85;
+            var progressPct = Math.max(0, Math.min(100, (live / targetTp) * 100));
 
-            const d1 = isLong ? (entP * 0.988) : (entP * 1.012);
-            const sl = isLong ? (avgP * 0.950) : (avgP * 1.050);
+            var d1 = isLong ? (entP * 0.988) : (entP * 1.012);
+            var sl = isLong ? (avgP * 0.950) : (avgP * 1.050);
 
             return `
               <tr class="hover:bg-gray-800/40 border-b border-gray-800/30 transition-colors">
@@ -401,7 +462,7 @@
         // ==========================================
         document.getElementById("historyCount").textContent = "Kayıtlı: " + hist.length + " İşlem";
 
-        const poolStats = {
+        var poolStats = {
           MAJOR: { win: 0, loss: 0, count: 0 },
           HUNTER: { win: 0, loss: 0, count: 0 },
           BALON: { win: 0, loss: 0, count: 0 },
@@ -410,9 +471,9 @@
         };
 
         hist.forEach(h => {
-          const t = h.type || 'HUNTER';
+          var t = h.type || 'HUNTER';
           if (poolStats[t]) {
-            const val = Number(h.pnl || 0);
+            var val = Number(h.pnl || 0);
             if (val >= 0) {
               poolStats[t].win += val;
             } else {
@@ -425,6 +486,33 @@
         // 1. Majör
         document.getElementById("winMajor").textContent = "+$" + poolStats.MAJOR.win.toFixed(2);
         document.getElementById("lossMajor").textContent = "-$" + poolStats.MAJOR.loss.toFixed(2);
+        // Havuz Ortalamaları: (Kâr - Zarar) / İşlem Sayısı
+        var calcAvg = (p) => {
+            var count = p.count || 0;
+            if (count === 0) return { text: "$0.00", cls: "text-gray-400" };
+            var net = (p.win || 0) - (p.loss || 0);
+            var val = net / count;
+            return {
+                text: (val >= 0 ? '+' : '-') + '$' + Math.abs(val).toFixed(2),
+                cls: val >= 0 ? "text-emerald-400" : "text-rose-400"
+            };
+        };
+
+        var setPoolAvg = (id, p) => {
+            var el = document.getElementById(id);
+            if (el) {
+                var res = calcAvg(p);
+                el.textContent = res.text;
+                el.className = "font-bold font-mono " + res.cls;
+            }
+        };
+
+        setPoolAvg("avgMajor", poolStats.MAJOR);
+        setPoolAvg("avgHunter", poolStats.HUNTER);
+        setPoolAvg("avgBalon", poolStats.BALON);
+        setPoolAvg("avgGainer", poolStats.GAINER);
+        setPoolAvg("avgLoser", poolStats.LOSER);
+
         document.getElementById("countMajor").textContent = poolStats.MAJOR.count + " İşlem";
 
         // 2. Avcı
@@ -448,24 +536,54 @@
         document.getElementById("countLoser").textContent = poolStats.LOSER.count + " İşlem";
 
         // 5 Havuzun Toplam Kâr, Zarar ve Net Değerlerini Hesaplayıp Şeride Basma
-        const totalPoolWin = (poolStats.MAJOR.win || 0) + (poolStats.HUNTER.win || 0) + (poolStats.BALON.win || 0) + (poolStats.GAINER.win || 0) + (poolStats.LOSER.win || 0);
-        const totalPoolLoss = (poolStats.MAJOR.loss || 0) + (poolStats.HUNTER.loss || 0) + (poolStats.BALON.loss || 0) + (poolStats.GAINER.loss || 0) + (poolStats.LOSER.loss || 0);
-        const totalPoolNet = totalPoolWin - totalPoolLoss;
+        var totalPoolWin = (poolStats.MAJOR.win || 0) + (poolStats.HUNTER.win || 0) + (poolStats.BALON.win || 0) + (poolStats.GAINER.win || 0) + (poolStats.LOSER.win || 0);
+        var totalPoolLoss = (poolStats.MAJOR.loss || 0) + (poolStats.HUNTER.loss || 0) + (poolStats.BALON.loss || 0) + (poolStats.GAINER.loss || 0) + (poolStats.LOSER.loss || 0);
+        var totalPoolNet = totalPoolWin - totalPoolLoss;
 
-        // BRÜT KÂR KUTUSUNU DA 5 HAVUZUN GERÇEK BRÜTÜNE EŞİTLEME
-        const elStatWin = document.getElementById('statWinPnl');
+        // BRÜT KÂR VE ZARAR KUTULARINI 5 HAVUZUN GERÇEK DEĞERLERİNE EŞİTLEME
+        var elStatWin = document.getElementById('statWinPnl');
         if (elStatWin) elStatWin.textContent = '+$' + totalPoolWin.toFixed(2);
 
-        const elSumWin = document.getElementById('summaryTotalWin');
-        const elSumLoss = document.getElementById('summaryTotalLoss');
-        const elSumNet = document.getElementById('summaryTotalNet');
+        // ZARAR, İŞLEM SAYISI VE ORTALAMA KÂR KUTULARINI SENKRONİZE ET
+        var elStatLoss = document.getElementById('statLossPnl');
+        if (elStatLoss) elStatLoss.textContent = '-$' + Math.abs(totalPoolLoss).toFixed(2);
+
+        var totalTradesCount = (poolStats.MAJOR.count || 0) + (poolStats.HUNTER.count || 0) + (poolStats.BALON.count || 0) + (poolStats.GAINER.count || 0) + (poolStats.LOSER.count || 0);
+        var elStatTrades = document.getElementById('statTradeCount');
+        if (elStatTrades) elStatTrades.textContent = totalTradesCount;
+
+        var accurateAvg = totalTradesCount > 0 ? (totalPoolNet / totalTradesCount) : 0;
+        var elAvgWin = document.getElementById('statAvgWin');
+        if (elAvgWin) {
+            elAvgWin.textContent = (accurateAvg >= 0 ? '+' : '-') + '$' + Math.abs(accurateAvg).toFixed(2);
+            elAvgWin.className = (accurateAvg >= 0 ? 'text-emerald-400' : 'text-rose-400') + ' text-base font-bold';
+        }
+        
+        var elStatLoss = document.getElementById('statLossPnl');
+        if (elStatLoss) elStatLoss.textContent = '-$' + Math.abs(totalPoolLoss).toFixed(2);
+
+        // TOPLAM İŞLEM SAYISI VE ORTALAMA KÂR KUTUSU
+        var totalTradesCount = (poolStats.MAJOR.count || 0) + (poolStats.HUNTER.count || 0) + (poolStats.BALON.count || 0) + (poolStats.GAINER.count || 0) + (poolStats.LOSER.count || 0);
+        var elStatTrades = document.getElementById('statTradeCount');
+        if (elStatTrades) elStatTrades.textContent = totalTradesCount;
+
+        var accurateAvg = totalTradesCount > 0 ? (totalPoolNet / totalTradesCount) : 0;
+        var elAvgWin = document.getElementById('statAvgWin');
+        if (elAvgWin) {
+            elAvgWin.textContent = (accurateAvg >= 0 ? '+' : '-') + '$' + Math.abs(accurateAvg).toFixed(2);
+            elAvgWin.className = (accurateAvg >= 0 ? 'text-emerald-400' : 'text-rose-400') + ' text-base font-bold';
+        }
+
+        var elSumWin = document.getElementById('summaryTotalWin');
+        var elSumLoss = document.getElementById('summaryTotalLoss');
+        var elSumNet = document.getElementById('summaryTotalNet');
 
         // 4. Ortalama Net Kâr = Net Kâr / İşlem Sayısı
-        const elTradeCount = document.getElementById('statTradeCount');
-        const elAvgWin = document.getElementById('statAvgWin');
+        var elTradeCount = document.getElementById('statTradeCount');
+        var elAvgWin = document.getElementById('statAvgWin');
         if (elAvgWin) {
-            const countVal = elTradeCount ? (parseInt(elTradeCount.textContent) || 0) : 0;
-            const avgVal = countVal > 0 ? (totalPoolNet / countVal) : 0;
+            var countVal = elTradeCount ? (parseInt(elTradeCount.textContent) || 0) : 0;
+            var avgVal = countVal > 0 ? (totalPoolNet / countVal) : 0;
             elAvgWin.textContent = (avgVal >= 0 ? '+' : '-') + '$' + Math.abs(avgVal).toFixed(2);
             elAvgWin.className = "text-base font-bold " + (avgVal >= 0 ? "text-emerald-400" : "text-rose-400");
         }
@@ -478,20 +596,20 @@
         }
 
         // TEPE KARTLARI HAVUZ TOPLAMLARIYLA EŞİTLEME (10.000 + Net Kâr + Canlı PnL)
-        const livePnlNow = Number(s.liveUnrealizedPnl || 0);
-        const finalCalculatedEquity = 10000.00 + totalPoolNet + livePnlNow;
+        var livePnlNow = Number(s.liveUnrealizedPnl || 0);
+        var finalCalculatedEquity = 10000.00 + totalPoolNet + livePnlNow;
 
-        const elHeaderEquity = document.getElementById('stateEquity');
+        var elHeaderEquity = document.getElementById('stateEquity');
         if (elHeaderEquity) {
             elHeaderEquity.textContent = '$' + finalCalculatedEquity.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        const elHeaderNet = document.getElementById('statTodayClosed');
+        var elHeaderNet = document.getElementById('statTodayClosed');
 
         // 4. Ortalama Kâr (Net Kâr / Toplam İşlem Sayısı)
-        const totalTradesCount = Number(s.totalTrades || (ds.totalTrades || (state.history ? state.history.length : 0)));
-        const accurateAvgProfit = totalTradesCount > 0 ? (totalPoolNet / totalTradesCount) : 0;
-        const elAvgProfit = document.getElementById('statAvgProfit');
+        var totalTradesCount = dTrades;
+        var accurateAvgProfit = totalTradesCount > 0 ? (totalPoolNet / totalTradesCount) : 0;
+        var elAvgProfit = document.getElementById('statAvgProfit');
         if (elAvgProfit) {
             elAvgProfit.textContent = (accurateAvgProfit >= 0 ? '+' : '-') + '$' + Math.abs(accurateAvgProfit).toFixed(2);
             elAvgProfit.className = accurateAvgProfit >= 0 ? "text-emerald-400" : "text-rose-400";
@@ -501,15 +619,17 @@
             elHeaderNet.className = "text-xl font-bold mt-1 " + (totalPoolNet >= 0 ? "text-emerald-400" : "text-rose-400");
         }
 
-        // Kapanan Tablo Listesi
-        const tbodyHist = document.getElementById('historyBody');
-        if (hist.length > 0) {
-          tbodyHist.innerHTML = hist.map(h => {
-            const typeShort = getTypeShort(h.type);
-            const typeBadge = getTypeBadgeClass(h.type);
-            const sideLetter = h.side === 'LONG' ? 'L' : 'S';
-            const sideBadge = h.side === 'LONG' ? 'badge-long' : 'badge-short';
-            const coinName = cleanSymbol(h.symbol);
+                // Kapanan Tablo Listesi (En son kapanan en üstte)
+        var tbodyHist = document.getElementById('historyBody');
+        if (hist && hist.length > 0) {
+            // Son işlemleri ters çevirip en güncel 100 tanesini hızlıca bas
+            var displayHist = (hist || []).slice().sort((a, b) => (b.time || "").localeCompare(a.time || "")).slice(0, 200);
+            tbodyHist.innerHTML = displayHist.map(h => {
+            var typeShort = getTypeShort(h.type);
+            var typeBadge = getTypeBadgeClass(h.type);
+            var sideLetter = h.side === 'LONG' ? 'L' : 'S';
+            var sideBadge = h.side === 'LONG' ? 'badge-long' : 'badge-short';
+            var coinName = cleanSymbol(h.symbol);
 
             return `
               <tr class="hover:bg-gray-800/40">

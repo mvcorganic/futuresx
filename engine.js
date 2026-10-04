@@ -4,6 +4,17 @@ function isValidSymbol(sym) {
   return typeof sym === "string" && /^[A-Z0-9]+$/.test(sym);
 }
 const fs = require('fs');
+
+// KALICI İŞLEM ARŞİVİ (Diske sonsuz kayıt)
+function appendToPermanentArchive(trade) {
+    try {
+        const line = JSON.stringify(trade) + "\n";
+        fs.appendFileSync("all_trades.jsonl", line, "utf8");
+    } catch (e) {
+        console.error("Arşivleme hatası:", e.message);
+    }
+}
+
 const path = require('path');
 const https = require('https');
 const config = require('./config');
@@ -210,7 +221,7 @@ function evaluateEntries(pMap) {
   }
 
   // 3. Balon Havuzu (Özel Göstergeler: Z-Skor ve RSI)
-  if (counts.balon < config.LIMITS.MAX_BALON_SLOTS) {
+  if (false && counts.balon < config.LIMITS.MAX_BALON_SLOTS) {
     for (const sym of dynamicBalon) {
       if (!state.positions[sym] && pMap[sym]) {
         const ind = priceTracker[sym];
@@ -238,7 +249,7 @@ function evaluateEntries(pMap) {
   }
 
   // 5. Losers Havuzu (Dip Tepkisi / Aşırı Satım Sekmesi)
-  if (counts.loser < config.LIMITS.MAX_LOSER_SLOTS) {
+  if (false && counts.loser < config.LIMITS.MAX_LOSER_SLOTS) {
     for (const sym of dynamicLosers) {
       if (!state.positions[sym] && pMap[sym]) {
         const ind = priceTracker[sym];
@@ -376,7 +387,7 @@ function closePosition(symbol, netPnl, exitReason) {
     state.stats.totalBnbFee = parseFloat(((state.stats.totalBnbFee || 0) + feeBnb).toFixed(6));
   }
 
-  // Geçmiş Dizisine Ekle (1000 İşlem Kapasitesi)
+  // Geçmiş Dizisine Ekle (20000 İşlem Günlük Kapasite)
   const d = new Date();
   const timeStr = d.toLocaleTimeString("tr-TR", { timeZone: "Europe/Istanbul", hour12: false });
 
@@ -389,7 +400,7 @@ function closePosition(symbol, netPnl, exitReason) {
     exitReason: exitReason
   });
 
-  if (state.history.length > 1000) state.history.pop();
+  if (state.history.length > 20000) state.history.pop();
   delete state.positions[symbol];
 
   console.log(`🎯 [KAPATILDI] ${symbol} (${pos.type}) | Net PnL: ${pnlNum >= 0 ? '+' : ''}$${pnlNum} | Sebep: ${exitReason}`);
@@ -458,3 +469,25 @@ module.exports = {
   getState,
   state
 };
+
+
+function checkDailyReset() {
+    const now = new Date();
+    const todayStr = now.toLocaleDateString('tr-TR', { timeZone: 'Europe/Istanbul' });
+    if (!state.currentDay) {
+        state.currentDay = todayStr;
+    } else if (state.currentDay !== todayStr) {
+        console.log("📅 Yeni Gün Başladı (" + todayStr + "). Günlük istatistikler ve günlük işlem tablosu sıfırlanıyor...");
+        state.currentDay = todayStr;
+        // Günlük işlem listesini sıfırla (tüm işlemler all_trades.jsonl içinde güvendedir)
+        state.history = [];
+        if (state.dailySummary) {
+            state.dailySummary.totalTrades = 0;
+            state.dailySummary.netProfit = 0;
+            state.dailySummary.grossProfit = 0;
+            state.dailySummary.grossLoss = 0;
+        }
+        saveState();
+    }
+}
+setInterval(checkDailyReset, 60000);

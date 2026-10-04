@@ -30,11 +30,11 @@ module.exports = {
 
   LIMITS: {
     MAX_TOTAL_SLOTS: 50,
-    MAX_MAJOR_SLOTS: 15,
+    MAX_MAJOR_SLOTS: 10,
     MAX_HUNTER_SLOTS: 20,
-    MAX_BALON_SLOTS: 5,
-    MAX_GAINER_SLOTS: 5,
-    MAX_LOSER_SLOTS: 5
+    MAX_BALON_SLOTS: 0,
+    MAX_GAINER_SLOTS: 20,
+    MAX_LOSER_SLOTS: 0
   },
 
   // Kategori bazlı sermaye ve kâr/zarar kuralları (3X Kaldıraç)
