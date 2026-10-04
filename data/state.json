@@ -1,16 +1,16 @@
 {
   "stats": {
-    "currentTotalEquity": 10514.68,
-    "freeMargin": 7547.269999999925,
-    "usedMargin": 3010,
-    "liveUnrealizedPnl": -42.59,
-    "todayClosedPnl": 557.27,
-    "totalClosedPnl": 557.27,
+    "currentTotalEquity": 10544.85,
+    "freeMargin": 7677.189999999926,
+    "usedMargin": 2910,
+    "liveUnrealizedPnl": -42.34,
+    "todayClosedPnl": 587.19,
+    "totalClosedPnl": 587.19,
     "todayLoss": 2109.82,
-    "totalTrades": 2963,
-    "winTrades": 2605,
-    "bnbBalance": 0.712511,
-    "totalBnbFee": 0.287489
+    "totalTrades": 2992,
+    "winTrades": 2634,
+    "bnbBalance": 0.709563,
+    "totalBnbFee": 0.290437
   },
   "positions": {
     "XRPUSDT": {
@@ -19,7 +19,7 @@
       "side": "SHORT",
       "entryPrice": 1.4844,
       "avgPrice": 1.49335,
-      "curPrice": 1.5042,
+      "curPrice": 1.5015,
       "margin": 100,
       "totalMargin": 200,
       "leverage": 3,
@@ -27,7 +27,7 @@
       "startTime": 1791031158707,
       "minPnl": -6.4485887434292515,
       "maxPnl": 0.5456750202101708,
-      "livePnl": -4.359326346804176
+      "livePnl": -3.274517025479667
     },
     "ETHUSDT": {
       "symbol": "ETHUSDT",
@@ -35,7 +35,7 @@
       "side": "SHORT",
       "entryPrice": 2691.75,
       "avgPrice": 2691.75,
-      "curPrice": 2696.91,
+      "curPrice": 2696.69,
       "margin": 100,
       "totalMargin": 100,
       "leverage": 3,
@@ -43,7 +43,7 @@
       "startTime": 1791073194145,
       "minPnl": -1.6840345500139455,
       "maxPnl": 0.3655614377264085,
-      "livePnl": -0.5750905544719815
+      "livePnl": -0.5505711897464536
     },
     "SOLUSDT": {
       "symbol": "SOLUSDT",
@@ -51,7 +51,7 @@
       "side": "SHORT",
       "entryPrice": 119.99,
       "avgPrice": 120.72999999999999,
-      "curPrice": 121.56,
+      "curPrice": 121.48,
       "margin": 100,
       "totalMargin": 200,
       "leverage": 3,
@@ -59,7 +59,7 @@
       "startTime": 1791074038209,
       "minPnl": -6.510395096496397,
       "maxPnl": 0.27502291857654665,
-      "livePnl": -4.124906816864139
+      "livePnl": -3.7273254369254416
     },
     "CRVUSDT": {
       "symbol": "CRVUSDT",
@@ -67,7 +67,7 @@
       "side": "LONG",
       "entryPrice": 0.3766,
       "avgPrice": 0.37375,
-      "curPrice": 0.368,
+      "curPrice": 0.3681,
       "margin": 60,
       "totalMargin": 120,
       "leverage": 3,
@@ -75,7 +75,7 @@
       "startTime": 1791092563886,
       "minPnl": -6.309030100334448,
       "maxPnl": 0.1433882103027192,
-      "livePnl": -5.53846153846157
+      "livePnl": -5.442140468227467
     },
     "BNBUSDT": {
       "symbol": "BNBUSDT",
@@ -83,7 +83,7 @@
       "side": "SHORT",
       "entryPrice": 787.79,
       "avgPrice": 787.79,
-      "curPrice": 787.6,
+      "curPrice": 789.04,
       "margin": 100,
       "totalMargin": 100,
       "leverage": 3,
@@ -91,7 +91,7 @@
       "startTime": 1791094778834,
       "minPnl": -3.0160321913200496,
       "maxPnl": 0.4912476675255958,
-      "livePnl": 0.07235430762002852
+      "livePnl": -0.47601518171086205
     },
     "AVAXUSDT": {
       "symbol": "AVAXUSDT",
@@ -99,7 +99,7 @@
       "side": "SHORT",
       "entryPrice": 10.956,
       "avgPrice": 11.021999999999998,
-      "curPrice": 11.085,
+      "curPrice": 11.048,
       "margin": 100,
       "totalMargin": 200,
       "leverage": 3,
@@ -107,7 +107,7 @@
       "startTime": 1791116226151,
       "minPnl": -4.354926510615234,
       "maxPnl": 0.1916757940854237,
-      "livePnl": -3.429504627109548
+      "livePnl": -1.4153511159500043
     },
     "UNIUSDT": {
       "symbol": "UNIUSDT",
@@ -115,7 +115,7 @@
       "side": "SHORT",
       "entryPrice": 8.987,
       "avgPrice": 8.987,
-      "curPrice": 9.02,
+      "curPrice": 9.012,
       "margin": 100,
       "totalMargin": 100,
       "leverage": 3,
@@ -123,23 +123,7 @@
       "startTime": 1791116226151,
       "minPnl": -2.6371425392233436,
       "maxPnl": 0.40057861355292496,
-      "livePnl": -1.1015911872704842
-    },
-    "KASUSDT": {
-      "symbol": "KASUSDT",
-      "type": "HUNTER",
-      "side": "SHORT",
-      "entryPrice": 0.04193,
-      "avgPrice": 0.042245000000000005,
-      "curPrice": 0.04219,
-      "margin": 60,
-      "totalMargin": 120,
-      "leverage": 3,
-      "dcaStep": 1,
-      "startTime": 1791119332703,
-      "minPnl": -3.536513196827957,
-      "maxPnl": 0.4686945200616005,
-      "livePnl": 0.4686945200616005
+      "livePnl": -0.8345387782352405
     },
     "LINKUSDT": {
       "symbol": "LINKUSDT",
@@ -147,7 +131,7 @@
       "side": "SHORT",
       "entryPrice": 14.103,
       "avgPrice": 14.103,
-      "curPrice": 14.144,
+      "curPrice": 14.125,
       "margin": 100,
       "totalMargin": 100,
       "leverage": 3,
@@ -155,7 +139,7 @@
       "startTime": 1791123113067,
       "minPnl": -2.4888321633695143,
       "maxPnl": 0.34035311635822196,
-      "livePnl": -0.8721548606679509
+      "livePnl": -0.4679855349925599
     },
     "GALAUSDT": {
       "symbol": "GALAUSDT",
@@ -163,7 +147,7 @@
       "side": "LONG",
       "entryPrice": 0.002543,
       "avgPrice": 0.002543,
-      "curPrice": 0.002536,
+      "curPrice": 0.002539,
       "margin": 60,
       "totalMargin": 60,
       "leverage": 3,
@@ -171,7 +155,7 @@
       "startTime": 1791123924323,
       "minPnl": -1.486433346441224,
       "maxPnl": 0.6370428627605115,
-      "livePnl": -0.4954777821470747
+      "livePnl": -0.2831301612269042
     },
     "RENDERUSDT": {
       "symbol": "RENDERUSDT",
@@ -179,7 +163,7 @@
       "side": "SHORT",
       "entryPrice": 1.961,
       "avgPrice": 1.961,
-      "curPrice": 1.971,
+      "curPrice": 1.968,
       "margin": 60,
       "totalMargin": 60,
       "leverage": 3,
@@ -187,7 +171,7 @@
       "startTime": 1791123949338,
       "minPnl": -2.3865374808771054,
       "maxPnl": 0.3671596124426316,
-      "livePnl": -0.9178990311065791
+      "livePnl": -0.6425293217745952
     },
     "GRTUSDT": {
       "symbol": "GRTUSDT",
@@ -195,15 +179,15 @@
       "side": "SHORT",
       "entryPrice": 0.02827,
       "avgPrice": 0.028499999999999998,
-      "curPrice": 0.02865,
+      "curPrice": 0.02849,
       "margin": 60,
       "totalMargin": 120,
       "leverage": 3,
       "dcaStep": 1,
       "startTime": 1791124002363,
       "minPnl": -4.6736842105263445,
-      "maxPnl": 0.0636717368234852,
-      "livePnl": -1.8947368421052737
+      "maxPnl": 0.12631578947363525,
+      "livePnl": 0.12631578947363525
     },
     "ARBUSDT": {
       "symbol": "ARBUSDT",
@@ -211,7 +195,7 @@
       "side": "SHORT",
       "entryPrice": 0.20068,
       "avgPrice": 0.20068,
-      "curPrice": 0.20159,
+      "curPrice": 0.20085,
       "margin": 60,
       "totalMargin": 60,
       "leverage": 3,
@@ -219,39 +203,23 @@
       "startTime": 1791124058379,
       "minPnl": -1.6145106637432693,
       "maxPnl": 0.6009567470599996,
-      "livePnl": -0.8162248355590938
+      "livePnl": -0.1524815626868678
     },
     "RUNEUSDT": {
       "symbol": "RUNEUSDT",
       "type": "HUNTER",
       "side": "SHORT",
       "entryPrice": 0.8004,
-      "avgPrice": 0.8004,
-      "curPrice": 0.8055,
+      "avgPrice": 0.80655,
+      "curPrice": 0.8071,
       "margin": 60,
-      "totalMargin": 60,
+      "totalMargin": 120,
       "leverage": 3,
-      "dcaStep": 0,
+      "dcaStep": 1,
       "startTime": 1791125286937,
-      "minPnl": -2.3613193403298247,
-      "maxPnl": 0.22488755622188927,
-      "livePnl": -1.1469265367316326
-    },
-    "LTCUSDT": {
-      "symbol": "LTCUSDT",
-      "type": "MAJOR",
-      "side": "SHORT",
-      "entryPrice": 71.55,
-      "avgPrice": 71.55,
-      "curPrice": 71.65,
-      "margin": 100,
-      "totalMargin": 100,
-      "leverage": 3,
-      "dcaStep": 0,
-      "startTime": 1791125426000,
-      "minPnl": -2.89308176100628,
-      "maxPnl": 0.04192872117396606,
-      "livePnl": -0.41928721174007766
+      "minPnl": -2.7661169415292304,
+      "maxPnl": 0.557931932304247,
+      "livePnl": -0.24549005021389642
     },
     "ICPUSDT": {
       "symbol": "ICPUSDT",
@@ -259,7 +227,7 @@
       "side": "LONG",
       "entryPrice": 3.426,
       "avgPrice": 3.4000000000000004,
-      "curPrice": 3.369,
+      "curPrice": 3.363,
       "margin": 60,
       "totalMargin": 120,
       "leverage": 3,
@@ -267,7 +235,7 @@
       "startTime": 1791125426000,
       "minPnl": -4.0235294117647324,
       "maxPnl": 0.4203152364273208,
-      "livePnl": -3.2823529411764847
+      "livePnl": -3.917647058823568
     },
     "ATOMUSDT": {
       "symbol": "ATOMUSDT",
@@ -275,7 +243,7 @@
       "side": "LONG",
       "entryPrice": 1.802,
       "avgPrice": 1.788,
-      "curPrice": 1.772,
+      "curPrice": 1.773,
       "margin": 60,
       "totalMargin": 120,
       "leverage": 3,
@@ -283,23 +251,7 @@
       "startTime": 1791125582065,
       "minPnl": -4.228187919463113,
       "maxPnl": 0.39955604883462853,
-      "livePnl": -3.221476510067117
-    },
-    "SEIUSDT": {
-      "symbol": "SEIUSDT",
-      "type": "HUNTER",
-      "side": "SHORT",
-      "entryPrice": 0.07495,
-      "avgPrice": 0.07495,
-      "curPrice": 0.07487,
-      "margin": 60,
-      "totalMargin": 60,
-      "leverage": 3,
-      "dcaStep": 0,
-      "startTime": 1791126245325,
-      "minPnl": -2.161440960640422,
-      "maxPnl": 0.5763842561707904,
-      "livePnl": 0.19212808539025233
+      "livePnl": -3.0201342281879446
     },
     "SANDUSDT": {
       "symbol": "SANDUSDT",
@@ -307,7 +259,7 @@
       "side": "LONG",
       "entryPrice": 0.07811,
       "avgPrice": 0.07749500000000001,
-      "curPrice": 0.07688,
+      "curPrice": 0.07712,
       "margin": 60,
       "totalMargin": 120,
       "leverage": 3,
@@ -315,7 +267,7 @@
       "startTime": 1791126245325,
       "minPnl": -5.319052842118879,
       "maxPnl": 0.7835104340033447,
-      "livePnl": -2.856958513452501
+      "livePnl": -1.7420478740564567
     },
     "WIFUSDT": {
       "symbol": "WIFUSDT",
@@ -323,47 +275,15 @@
       "side": "LONG",
       "entryPrice": 0.2472,
       "avgPrice": 0.2472,
-      "curPrice": 0.246,
+      "curPrice": 0.2454,
       "margin": 60,
       "totalMargin": 60,
       "leverage": 3,
       "dcaStep": 0,
       "startTime": 1791127382786,
-      "minPnl": -0.873786407766995,
+      "minPnl": -1.3834951456310773,
       "maxPnl": 0.21844660194174373,
-      "livePnl": -0.873786407766995
-    },
-    "AXSUSDT": {
-      "symbol": "AXSUSDT",
-      "type": "HUNTER",
-      "side": "LONG",
-      "entryPrice": 1.3428,
-      "avgPrice": 1.3428,
-      "curPrice": 1.3415,
-      "margin": 60,
-      "totalMargin": 60,
-      "leverage": 3,
-      "dcaStep": 0,
-      "startTime": 1791127382786,
-      "minPnl": -1.0321715817694423,
-      "maxPnl": 0.3083109919571004,
-      "livePnl": -0.17426273458446098
-    },
-    "STRKUSDT": {
-      "symbol": "STRKUSDT",
-      "type": "GAINER",
-      "side": "SHORT",
-      "entryPrice": 0.05689,
-      "avgPrice": 0.05689,
-      "curPrice": 0.05762,
-      "margin": 50,
-      "totalMargin": 50,
-      "leverage": 3,
-      "dcaStep": 0,
-      "startTime": 1791127851963,
-      "minPnl": -2.953067322903839,
-      "maxPnl": 0.2636667252592798,
-      "livePnl": -1.9247670943926734
+      "livePnl": -1.3106796116504824
     },
     "MANAUSDT": {
       "symbol": "MANAUSDT",
@@ -371,15 +291,15 @@
       "side": "LONG",
       "entryPrice": 0.10454,
       "avgPrice": 0.10454,
-      "curPrice": 0.10439,
+      "curPrice": 0.10403,
       "margin": 60,
       "totalMargin": 60,
       "leverage": 3,
       "dcaStep": 0,
       "startTime": 1791128233118,
-      "minPnl": -0.671513296345875,
+      "minPnl": -1.0330973789936686,
       "maxPnl": 0.12052802754926452,
-      "livePnl": -0.25827434474841715
+      "livePnl": -0.8781327721446277
     },
     "BLURUSDT": {
       "symbol": "BLURUSDT",
@@ -387,63 +307,31 @@
       "side": "LONG",
       "entryPrice": 0.02182,
       "avgPrice": 0.02182,
-      "curPrice": 0.02179,
+      "curPrice": 0.02175,
       "margin": 60,
       "totalMargin": 60,
       "leverage": 3,
       "dcaStep": 0,
       "startTime": 1791128248128,
-      "minPnl": -0.3299725022914623,
+      "minPnl": -0.8249312557286843,
       "maxPnl": 0.4124656278643565,
-      "livePnl": -0.2474793767185967
+      "livePnl": -0.5774518790100877
     },
     "BEAMXUSDT": {
       "symbol": "BEAMXUSDT",
       "type": "GAINER",
       "side": "SHORT",
       "entryPrice": 0.002596,
-      "avgPrice": 0.002596,
-      "curPrice": 0.00263,
+      "avgPrice": 0.0026235,
+      "curPrice": 0.002628,
       "margin": 50,
-      "totalMargin": 50,
+      "totalMargin": 100,
       "leverage": 3,
-      "dcaStep": 0,
+      "dcaStep": 1,
       "startTime": 1791128332174,
-      "minPnl": -2.6001540832049503,
+      "minPnl": -3.1779661016949365,
       "maxPnl": 0,
-      "livePnl": -1.9645608628659579
-    },
-    "SUIUSDT": {
-      "symbol": "SUIUSDT",
-      "type": "MAJOR",
-      "side": "SHORT",
-      "entryPrice": 1.2492,
-      "avgPrice": 1.2492,
-      "curPrice": 1.2543,
-      "margin": 100,
-      "totalMargin": 100,
-      "leverage": 3,
-      "dcaStep": 0,
-      "startTime": 1791128459252,
-      "minPnl": -3.5542747358309135,
-      "maxPnl": 0.45629202689721726,
-      "livePnl": -1.2247838616714413
-    },
-    "NEARUSDT": {
-      "symbol": "NEARUSDT",
-      "type": "MAJOR",
-      "side": "LONG",
-      "entryPrice": 4.844,
-      "avgPrice": 4.844,
-      "curPrice": 4.832,
-      "margin": 100,
-      "totalMargin": 100,
-      "leverage": 3,
-      "dcaStep": 0,
-      "startTime": 1791128499274,
-      "minPnl": -1.6721717588769696,
-      "maxPnl": 0.06193228736577905,
-      "livePnl": -0.7431874483897886
+      "livePnl": -0.5145797598627975
     },
     "LDOUSDT": {
       "symbol": "LDOUSDT",
@@ -451,63 +339,15 @@
       "side": "LONG",
       "entryPrice": 0.4543,
       "avgPrice": 0.4543,
-      "curPrice": 0.4544,
+      "curPrice": 0.4519,
       "margin": 60,
       "totalMargin": 60,
       "leverage": 3,
       "dcaStep": 0,
       "startTime": 1791128838418,
-      "minPnl": -0.23772837332158947,
+      "minPnl": -0.9509134932863579,
       "maxPnl": 0.43583535108960636,
-      "livePnl": 0.03962139555361657
-    },
-    "FETUSDT": {
-      "symbol": "FETUSDT",
-      "type": "HUNTER",
-      "side": "LONG",
-      "entryPrice": 0.2475,
-      "avgPrice": 0.2475,
-      "curPrice": 0.2459,
-      "margin": 60,
-      "totalMargin": 60,
-      "leverage": 3,
-      "dcaStep": 0,
-      "startTime": 1791129032512,
-      "minPnl": -1.5272727272727205,
-      "maxPnl": 0.21818181818181437,
-      "livePnl": -1.1636363636363567
-    },
-    "THETAUSDT": {
-      "symbol": "THETAUSDT",
-      "type": "HUNTER",
-      "side": "LONG",
-      "entryPrice": 0.2276,
-      "avgPrice": 0.2276,
-      "curPrice": 0.2279,
-      "margin": 60,
-      "totalMargin": 60,
-      "leverage": 3,
-      "dcaStep": 0,
-      "startTime": 1791129107551,
-      "minPnl": -0.07908611599296142,
-      "maxPnl": 0.5536028119507957,
-      "livePnl": 0.2372583479789062
-    },
-    "FLOWUSDT": {
-      "symbol": "FLOWUSDT",
-      "type": "HUNTER",
-      "side": "LONG",
-      "entryPrice": 0.03195,
-      "avgPrice": 0.03195,
-      "curPrice": 0.03202,
-      "margin": 60,
-      "totalMargin": 60,
-      "leverage": 3,
-      "dcaStep": 0,
-      "startTime": 1791129117556,
-      "minPnl": 0,
-      "maxPnl": 0.6197183098591492,
-      "livePnl": 0.39436619718310206
+      "livePnl": -0.9509134932863579
     },
     "SNXUSDT": {
       "symbol": "SNXUSDT",
@@ -515,34 +355,378 @@
       "side": "LONG",
       "entryPrice": 0.2541,
       "avgPrice": 0.2541,
-      "curPrice": 0.2542,
+      "curPrice": 0.2533,
       "margin": 60,
       "totalMargin": 60,
       "leverage": 3,
       "dcaStep": 0,
       "startTime": 1791129166798,
-      "minPnl": -0.3541912632821727,
-      "maxPnl": 0.14167650531289266,
-      "livePnl": 0.07083825265642668
+      "minPnl": -0.6375442739079187,
+      "maxPnl": 0.4958677685950654,
+      "livePnl": -0.5667060212514528
+    },
+    "INJUSDT": {
+      "symbol": "INJUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "entryPrice": 7.497,
+      "avgPrice": 7.497,
+      "curPrice": 7.466,
+      "margin": 60,
+      "totalMargin": 60,
+      "leverage": 3,
+      "dcaStep": 0,
+      "startTime": 1791129708006,
+      "minPnl": -0.888355342136853,
+      "maxPnl": 0.1200480192076805,
+      "livePnl": -0.7442977190876277
+    },
+    "MUBARAKUSDT": {
+      "symbol": "MUBARAKUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "entryPrice": 0.0777,
+      "avgPrice": 0.0777,
+      "curPrice": 0.07921,
+      "margin": 50,
+      "totalMargin": 50,
+      "leverage": 3,
+      "dcaStep": 0,
+      "startTime": 1791129790040,
+      "minPnl": -2.992277992277984,
+      "maxPnl": 0.7915057915058061,
+      "livePnl": -2.91505791505791
+    },
+    "COLLECTUSDT": {
+      "symbol": "COLLECTUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "entryPrice": 0.02353,
+      "avgPrice": 0.02353,
+      "curPrice": 0.02396,
+      "margin": 50,
+      "totalMargin": 50,
+      "leverage": 3,
+      "dcaStep": 0,
+      "startTime": 1791130074980,
+      "minPnl": -2.86867828304294,
+      "maxPnl": 0.06374840628984016,
+      "livePnl": -2.7411814704632373
+    },
+    "AIOUSDT": {
+      "symbol": "AIOUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "entryPrice": 0.04565,
+      "avgPrice": 0.04565,
+      "curPrice": 0.04592,
+      "margin": 50,
+      "totalMargin": 50,
+      "leverage": 3,
+      "dcaStep": 0,
+      "startTime": 1791130323067,
+      "minPnl": -1.8072289156626338,
+      "maxPnl": 0.7557502738225664,
+      "livePnl": -0.8871851040525719
+    },
+    "NEARUSDT": {
+      "symbol": "NEARUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "entryPrice": 4.853,
+      "avgPrice": 4.853,
+      "curPrice": 4.844,
+      "margin": 100,
+      "totalMargin": 100,
+      "leverage": 3,
+      "dcaStep": 0,
+      "startTime": 1791130463808,
+      "minPnl": -0.5563568926436917,
+      "maxPnl": 0.7418091901916621,
+      "livePnl": -0.5563568926436917
+    },
+    "LTCUSDT": {
+      "symbol": "LTCUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "entryPrice": 71.39,
+      "avgPrice": 71.39,
+      "curPrice": 71.32,
+      "margin": 100,
+      "totalMargin": 100,
+      "leverage": 3,
+      "dcaStep": 0,
+      "startTime": 1791130545832,
+      "minPnl": -0.6303403838072799,
+      "maxPnl": 0.37820423028436784,
+      "livePnl": -0.2941588457767505
     },
     "AINUSDT": {
       "symbol": "AINUSDT",
       "type": "GAINER",
       "side": "SHORT",
-      "entryPrice": 0.05538,
-      "avgPrice": 0.05538,
-      "curPrice": 0.05554,
+      "entryPrice": 0.05439,
+      "avgPrice": 0.05494,
+      "curPrice": 0.05548,
       "margin": 50,
-      "totalMargin": 50,
+      "totalMargin": 100,
+      "leverage": 3,
+      "dcaStep": 1,
+      "startTime": 1791130639868,
+      "minPnl": -4.259191845649777,
+      "maxPnl": 0.19305019305019475,
+      "livePnl": -2.9486712777575472
+    },
+    "SUIUSDT": {
+      "symbol": "SUIUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "entryPrice": 1.2459,
+      "avgPrice": 1.2459,
+      "curPrice": 1.2443,
+      "margin": 100,
+      "totalMargin": 100,
       "leverage": 3,
       "dcaStep": 0,
-      "startTime": 1791129366037,
-      "minPnl": -2.49187432286025,
-      "maxPnl": 0.3521126760563331,
-      "livePnl": -0.4333694474539556
+      "startTime": 1791130853825,
+      "minPnl": -0.5538165181796216,
+      "maxPnl": 0.14447387430771344,
+      "livePnl": -0.38526366482062263
     }
   },
   "history": [
+    {
+      "time": "19:20:52",
+      "symbol": "SUIUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 0.67,
+      "exitReason": "Slot Rotasyonu (+$0.67)"
+    },
+    {
+      "time": "19:19:08",
+      "symbol": "PUMPUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.67,
+      "exitReason": "Slot Rotasyonu (+$0.67)"
+    },
+    {
+      "time": "19:16:30",
+      "symbol": "SUIUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 1.28,
+      "exitReason": "3x Kâr (+$1.28)"
+    },
+    {
+      "time": "19:16:17",
+      "symbol": "AINUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 2.21,
+      "exitReason": "3x Kâr (+$2.21)"
+    },
+    {
+      "time": "19:15:45",
+      "symbol": "LTCUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 0.67,
+      "exitReason": "Slot Rotasyonu (+$0.67)"
+    },
+    {
+      "time": "19:15:15",
+      "symbol": "AXSUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.78,
+      "exitReason": "Slot Rotasyonu (+$0.78)"
+    },
+    {
+      "time": "19:14:58",
+      "symbol": "AINUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.95,
+      "exitReason": "3x Kâr (+$0.95)"
+    },
+    {
+      "time": "19:14:47",
+      "symbol": "OPUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.68,
+      "exitReason": "Slot Rotasyonu (+$0.68)"
+    },
+    {
+      "time": "19:14:21",
+      "symbol": "NEARUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.81,
+      "exitReason": "Slot Rotasyonu (+$0.81)"
+    },
+    {
+      "time": "19:13:08",
+      "symbol": "AINUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.92,
+      "exitReason": "3x Kâr (+$0.92)"
+    },
+    {
+      "time": "19:12:12",
+      "symbol": "AINUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.93,
+      "exitReason": "3x Kâr (+$1.93)"
+    },
+    {
+      "time": "19:11:44",
+      "symbol": "AIOUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.01,
+      "exitReason": "3x Kâr (+$1.01)"
+    },
+    {
+      "time": "19:11:41",
+      "symbol": "FLOWUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.79,
+      "exitReason": "Slot Rotasyonu (+$0.79)"
+    },
+    {
+      "time": "19:10:47",
+      "symbol": "AIOUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.65,
+      "exitReason": "Slot Rotasyonu (+$0.65)"
+    },
+    {
+      "time": "19:09:51",
+      "symbol": "SEIUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.72,
+      "exitReason": "Slot Rotasyonu (+$0.72)"
+    },
+    {
+      "time": "19:09:38",
+      "symbol": "AINUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.3,
+      "exitReason": "3x Kâr (+$1.30)"
+    },
+    {
+      "time": "19:09:22",
+      "symbol": "FETUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.65,
+      "exitReason": "Slot Rotasyonu (+$0.65)"
+    },
+    {
+      "time": "19:09:11",
+      "symbol": "SUIUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 1.03,
+      "exitReason": "3x Kâr (+$1.03)"
+    },
+    {
+      "time": "19:08:25",
+      "symbol": "LYNUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 3.01,
+      "exitReason": "3x Kâr (+$3.01)"
+    },
+    {
+      "time": "19:08:01",
+      "symbol": "SUIUSDT",
+      "type": "MAJOR",
+      "side": "LONG",
+      "pnl": 0.67,
+      "exitReason": "Slot Rotasyonu (+$0.67)"
+    },
+    {
+      "time": "19:07:26",
+      "symbol": "AINUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.06,
+      "exitReason": "3x Kâr (+$1.06)"
+    },
+    {
+      "time": "19:07:16",
+      "symbol": "COLLECTUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.95,
+      "exitReason": "3x Kâr (+$0.95)"
+    },
+    {
+      "time": "19:06:36",
+      "symbol": "STRKUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.08,
+      "exitReason": "3x Kâr (+$1.08)"
+    },
+    {
+      "time": "19:05:30",
+      "symbol": "COLLECTUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 1.26,
+      "exitReason": "3x Kâr (+$1.26)"
+    },
+    {
+      "time": "19:02:52",
+      "symbol": "THETAUSDT",
+      "type": "HUNTER",
+      "side": "LONG",
+      "pnl": 0.79,
+      "exitReason": "Slot Rotasyonu (+$0.79)"
+    },
+    {
+      "time": "19:02:47",
+      "symbol": "AINUSDT",
+      "type": "GAINER",
+      "side": "SHORT",
+      "pnl": 0.98,
+      "exitReason": "3x Kâr (+$0.98)"
+    },
+    {
+      "time": "19:02:17",
+      "symbol": "SUIUSDT",
+      "type": "MAJOR",
+      "side": "SHORT",
+      "pnl": 0.89,
+      "exitReason": "Slot Rotasyonu (+$0.89)"
+    },
+    {
+      "time": "19:02:08",
+      "symbol": "KASUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.81,
+      "exitReason": "Slot Rotasyonu (+$0.81)"
+    },
+    {
+      "time": "19:01:48",
+      "symbol": "SEIUSDT",
+      "type": "HUNTER",
+      "side": "SHORT",
+      "pnl": 0.7,
+      "exitReason": "Slot Rotasyonu (+$0.70)"
+    },
     {
       "time": "19:01:25",
       "symbol": "MUBARAKUSDT",

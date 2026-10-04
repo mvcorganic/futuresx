@@ -274,6 +274,13 @@ function tryOpenPosition(symbol, type, price) {
 }
 
 function openPosition(symbol, type, side, price) {
+  // 0. Kara Liste Engeli (Zararcı coinler hiçbir havuza giremez)
+  const blacklist = config.BLACKLIST || [];
+  if (blacklist.includes(symbol)) {
+    // Sessizce reddet, slotu harcama
+    return;
+  }
+
   if (!isValidSymbol(symbol)) {
     console.warn(`[ENGEL] Standart dışı sembol reddedildi: ${symbol}`);
     return;

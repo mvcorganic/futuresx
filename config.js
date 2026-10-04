@@ -28,13 +28,35 @@ module.exports = {
     "MAGICUSDT", "SKYUSDT", "STGUSDT", "ZROUSDT", "NIGHTUSDT"
   ],
 
+  // KESİN KARA LİSTE (Hiçbir havuzdan işleme alınamaz)
+  BLACKLIST: [
+    "MAGMAUSDT",
+    "MOVRUSDT",
+    "GTCUSDT",
+    "MAGICUSDT",
+    "2ZUSDT",
+    "USUSDT",
+    "SCRUSDT",
+    "NIGHTUSDT",
+    "CAPUSDT",
+    "FLOCKUSDT",
+    "MONUSDT",
+    "SYNUSDT",
+    "CTUSDT",
+    "LYNUSDT",
+    "BTWUSDT",
+    "SKYUSDT",
+    "STGUSDT",
+    "ZROUSDT"
+],
+
   LIMITS: {
     MAX_TOTAL_SLOTS: 50,
     MAX_MAJOR_SLOTS: 10,
-    MAX_HUNTER_SLOTS: 20,
+    MAX_HUNTER_SLOTS: 15,
     MAX_BALON_SLOTS: 0,
-    MAX_GAINER_SLOTS: 20,
-    MAX_LOSER_SLOTS: 0
+    MAX_GAINER_SLOTS: 15,
+    MAX_LOSER_SLOTS: 10,
   },
 
   // Kategori bazlı sermaye ve kâr/zarar kuralları (3X Kaldıraç)

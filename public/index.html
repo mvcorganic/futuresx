@@ -130,7 +130,51 @@
       </div>
     </div>
 
-    <!-- Kapanan İşlem Günlüğü ve 5 HAVUZ KÂR | ZARAR | İŞLEM ŞERİDİ -->
+      <!-- BUGÜNE AİT REKORLAR PANOSU -->
+  <div class="card-panel rounded-lg p-3 sm:p-4 space-y-3 mb-4">
+    <div class="text-sm font-bold text-gray-200 flex items-center justify-between">
+      <span>🏆 Bugüne Ait Coin Rekorları (Top 10)</span>
+      <span class="text-xs text-amber-400 font-normal">Anlık Güncellenir</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+      
+      <!-- 1. En Çok Kâr Edenler -->
+      <div class="bg-gray-900/60 p-2.5 rounded-lg border border-emerald-900/40">
+        <div class="text-emerald-400 font-semibold mb-2 flex justify-between border-b border-gray-800 pb-1">
+          <span>🚀 En Çok Kâr Edenler</span>
+          <span class="text-[10px] text-gray-400">Kâr / Zarar / Net</span>
+        </div>
+        <div id="topProfitCoins" class="space-y-1 font-mono">
+          <div class="text-gray-500 py-2 text-center font-sans">Hesaplanıyor...</div>
+        </div>
+      </div>
+
+      <!-- 2. En Çok Zarar Edenler -->
+      <div class="bg-gray-900/60 p-2.5 rounded-lg border border-rose-900/40">
+        <div class="text-rose-400 font-semibold mb-2 flex justify-between border-b border-gray-800 pb-1">
+          <span>⚠️ En Çok Zarar Edenler</span>
+          <span class="text-[10px] text-gray-400">Kâr / Zarar / Net</span>
+        </div>
+        <div id="topLossCoins" class="space-y-1 font-mono">
+          <div class="text-gray-500 py-2 text-center font-sans">Hesaplanıyor...</div>
+        </div>
+      </div>
+
+      <!-- 3. En Çok İşlem Yapanlar -->
+      <div class="bg-gray-900/60 p-2.5 rounded-lg border border-blue-900/40">
+        <div class="text-blue-400 font-semibold mb-2 flex justify-between border-b border-gray-800 pb-1">
+          <span>⚡ En Çok İşlem Yapanlar</span>
+          <span class="text-[10px] text-gray-400">Adet / Net PnL</span>
+        </div>
+        <div id="topVolumeCoins" class="space-y-1 font-mono">
+          <div class="text-gray-500 py-2 text-center font-sans">Hesaplanıyor...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Kapanan İşlem Günlüğü ve 5 HAVUZ KÂR | ZARAR | İŞLEM ŞERİDİ -->
     <div class="card-panel rounded-lg p-3 sm:p-4 space-y-3">
       <div class="text-sm font-bold text-gray-200 flex items-center justify-between">
         <span>📜 Vadeli Kapanan İşlem Günlüğü</span>
@@ -623,7 +667,101 @@
         var tbodyHist = document.getElementById('historyBody');
         if (hist && hist.length > 0) {
             // Son işlemleri ters çevirip en güncel 100 tanesini hızlıca bas
-            var displayHist = (hist || []).slice().sort((a, b) => (b.time || "").localeCompare(a.time || "")).slice(0, 200);
+            
+    // Bugüne Ait Rekorlar Hesaplama Motoru (Top 10)
+    (function updateCoinRecords() {
+      var histData = (hist || []);
+      var coinStats = {};
+
+      for (var i = 0; i < histData.length; i++) {
+        var h = histData[i];
+        var rawSym = (h.symbol || "").replace("USDT", "");
+        if (!rawSym) continue;
+        var val = parseFloat(h.pnl !== undefined ? h.pnl : (h.netPnl || 0));
+        if (isNaN(val)) continue;
+
+        if (!coinStats[rawSym]) {
+          coinStats[rawSym] = { profit: 0, loss: 0, net: 0, count: 0 };
+        }
+        coinStats[rawSym].count++;
+        coinStats[rawSym].net += val;
+        if (val >= 0) {
+          coinStats[rawSym].profit += val;
+        } else {
+          coinStats[rawSym].loss += Math.abs(val);
+        }
+      }
+
+      var arr = Object.keys(coinStats).map(function(sym) {
+        return {
+          sym: sym,
+          profit: coinStats[sym].profit,
+          loss: coinStats[sym].loss,
+          net: coinStats[sym].net,
+          count: coinStats[sym].count
+        };
+      });
+
+      // 1. En çok net kâr edenler (İlk 10)
+      var topProfits = arr.slice().sort(function(a, b) { return b.net - a.net; }).slice(0, 10);
+      var profitEl = document.getElementById("topProfitCoins");
+      if (profitEl) {
+        var pHtml = "";
+        for (var p = 0; p < topProfits.length; p++) {
+          var cp = topProfits[p];
+          pHtml += '<div class="flex items-center justify-between py-0.5 border-b border-gray-800/50">' +
+            '<span class="text-gray-300 font-bold">' + (p + 1) + '. ' + cp.sym + '</span>' +
+            '<div class="flex items-center gap-1.5 text-[11px]">' +
+              '<span class="text-emerald-400">+$' + cp.profit.toFixed(1) + '</span>' +
+              '<span class="text-gray-500">/</span>' +
+              '<span class="text-rose-400">-$' + cp.loss.toFixed(1) + '</span>' +
+              '<span class="font-bold ' + (cp.net >= 0 ? "text-emerald-300" : "text-rose-300") + ' ml-1">(' + (cp.net >= 0 ? "+" : "") + '$' + cp.net.toFixed(2) + ')</span>' +
+            '</div>' +
+          '</div>';
+        }
+        profitEl.innerHTML = pHtml || '<div class="text-gray-500 py-1">Henüz işlem yok</div>';
+      }
+
+      // 2. En çok zarar edenler (İlk 10)
+      var topLosses = arr.slice().sort(function(a, b) { return a.net - b.net; }).slice(0, 10);
+      var lossEl = document.getElementById("topLossCoins");
+      if (lossEl) {
+        var lHtml = "";
+        for (var l = 0; l < topLosses.length; l++) {
+          var cl = topLosses[l];
+          lHtml += '<div class="flex items-center justify-between py-0.5 border-b border-gray-800/50">' +
+            '<span class="text-gray-300 font-bold">' + (l + 1) + '. ' + cl.sym + '</span>' +
+            '<div class="flex items-center gap-1.5 text-[11px]">' +
+              '<span class="text-emerald-400">+$' + cl.profit.toFixed(1) + '</span>' +
+              '<span class="text-gray-500">/</span>' +
+              '<span class="text-rose-400">-$' + cl.loss.toFixed(1) + '</span>' +
+              '<span class="font-bold ' + (cl.net >= 0 ? "text-emerald-300" : "text-rose-300") + ' ml-1">(' + (cl.net >= 0 ? "+" : "") + '$' + cl.net.toFixed(2) + ')</span>' +
+            '</div>' +
+          '</div>';
+        }
+        lossEl.innerHTML = lHtml || '<div class="text-gray-500 py-1">Henüz işlem yok</div>';
+      }
+
+      // 3. En çok işlem yapanlar (İlk 10)
+      var topVolume = arr.slice().sort(function(a, b) { return b.count - a.count; }).slice(0, 10);
+      var volEl = document.getElementById("topVolumeCoins");
+      if (volEl) {
+        var vHtml = "";
+        for (var v = 0; v < topVolume.length; v++) {
+          var cv = topVolume[v];
+          vHtml += '<div class="flex items-center justify-between py-0.5 border-b border-gray-800/50">' +
+            '<span class="text-gray-300 font-bold">' + (v + 1) + '. ' + cv.sym + '</span>' +
+            '<div class="flex items-center gap-2 text-[11px]">' +
+              '<span class="text-blue-400 font-semibold">' + cv.count + ' İşlem</span>' +
+              '<span class="font-bold ' + (cv.net >= 0 ? "text-emerald-300" : "text-rose-300") + '">(' + (cv.net >= 0 ? "+" : "") + '$' + cv.net.toFixed(2) + ')</span>' +
+            '</div>' +
+          '</div>';
+        }
+        volEl.innerHTML = vHtml || '<div class="text-gray-500 py-1">Henüz işlem yok</div>';
+      }
+    })();
+
+    var displayHist = (hist || []).slice().sort((a, b) => (b.time || "").localeCompare(a.time || "")).slice(0, 200);
             tbodyHist.innerHTML = displayHist.map(h => {
             var typeShort = getTypeShort(h.type);
             var typeBadge = getTypeBadgeClass(h.type);
