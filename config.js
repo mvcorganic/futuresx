@@ -30,24 +30,27 @@ module.exports = {
 
   // KESİN KARA LİSTE (Hiçbir havuzdan işleme alınamaz)
   BLACKLIST: [
+    "BTWUSDT",
+    "STRKUSDT",
+    "COLLECTUSDT",
+    "SANDUSDT",
+    "ICPUSDT",
+    "AXSUSDT",
+    "BRUSDT",
+    "USUSDT",
+    "GALAUSDT",
+    "MUBARAKUSDT",
+    "TIAUSDT",
+    "AVAXUSDT",
+    "FILUSDT",
     "MAGMAUSDT",
     "MOVRUSDT",
     "GTCUSDT",
     "MAGICUSDT",
     "2ZUSDT",
-    "USUSDT",
     "SCRUSDT",
     "NIGHTUSDT",
-    "CAPUSDT",
-    "FLOCKUSDT",
-    "MONUSDT",
-    "SYNUSDT",
-    "CTUSDT",
-    "LYNUSDT",
-    "BTWUSDT",
-    "SKYUSDT",
-    "STGUSDT",
-    "ZROUSDT"
+    "CAPUSDT"
 ],
 
   LIMITS: {
@@ -63,27 +66,27 @@ module.exports = {
   TIERS: {
     MAJOR: {
       MARGIN: 100.0,
-      MAIN_TP_USD: 1.00,
-      ROTATION_TP_USD: 0.20,
-      ROTATION_TIMEOUT_SEC: 180,
+      MAIN_TP_USD: 2.20,
+      ROTATION_TP_USD: 0.80,
+      ROTATION_TIMEOUT_SEC: 300,
       DCA_1_TRIGGER_PCT: -1.2,
       DCA_2_TRIGGER_PCT: -2.4,
       STOP_LOSS_USD: -7.50
     },
     HUNTER: {
       MARGIN: 60.0,
-      MAIN_TP_USD: 0.85,
-      ROTATION_TP_USD: 0.16,
-      ROTATION_TIMEOUT_SEC: 150,
+      MAIN_TP_USD: 2.20,
+      ROTATION_TP_USD: 0.80,
+      ROTATION_TIMEOUT_SEC: 300,
       DCA_1_TRIGGER_PCT: -1.5,
       DCA_2_TRIGGER_PCT: -2.5,
       STOP_LOSS_USD: -6.50
     },
     BALON: {
       MARGIN: 40.0,
-      MAIN_TP_USD: 0.70,
-      ROTATION_TP_USD: 0.15,
-      ROTATION_TIMEOUT_SEC: 90,
+      MAIN_TP_USD: 2.20,
+      ROTATION_TP_USD: 0.80,
+      ROTATION_TIMEOUT_SEC: 300,
       DCA_ENABLED: false,        // Balonlarda DCA yok (Tek kurşun ortalamaya dönüş)
       STOP_LOSS_USD: -3.50,      // Sıkı stop loss
       // İndikatör Tetikleyicileri
@@ -93,9 +96,9 @@ module.exports = {
     },
     GAINER: {
       MARGIN: 50.0,
-      MAIN_TP_USD: 0.90,
-      ROTATION_TP_USD: 0.18,
-      ROTATION_TIMEOUT_SEC: 120,
+      MAIN_TP_USD: 2.20,
+      ROTATION_TP_USD: 0.80,
+      ROTATION_TIMEOUT_SEC: 300,
       DCA_1_TRIGGER_PCT: -2.0,
       DCA_2_TRIGGER_PCT: null,   // Tek kademe DCA
       STOP_LOSS_USD: -5.00,
@@ -104,9 +107,9 @@ module.exports = {
     },
     LOSER: {
       MARGIN: 50.0,
-      MAIN_TP_USD: 0.90,
-      ROTATION_TP_USD: 0.18,
-      ROTATION_TIMEOUT_SEC: 120,
+      MAIN_TP_USD: 2.20,
+      ROTATION_TP_USD: 0.80,
+      ROTATION_TIMEOUT_SEC: 300,
       DCA_1_TRIGGER_PCT: -2.0,
       DCA_2_TRIGGER_PCT: null,   // Tek kademe DCA
       STOP_LOSS_USD: -5.00,
