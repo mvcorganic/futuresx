@@ -369,28 +369,35 @@
         document.getElementById('statEquity').textContent = '$' + Number(s.currentTotalEquity || 0).toLocaleString('en-US', { minimumFractionDigits: 2 });
         document.getElementById('statBnb').textContent = Number(s.bnbBalance || 1.0).toFixed(4);
         
-        // 2. Günlük Net Kâr
-        var winVal = (s.todayClosedPnl !== undefined) ? s.todayClosedPnl : (ds.totalPnl || 0);
-        var lossVal = (ds.totalLoss !== undefined && ds.totalLoss > 0) ? ds.totalLoss : (s.todayLoss || 0);
-        var todayNetProfit = winVal - lossVal;
-        document.getElementById('statTodayClosed').textContent = (todayNetProfit >= 0 ? '+' : '') + '$' + Number(todayNetProfit).toFixed(2);
-
-        // 4. İşlem Sayısı | Ortalama Kâr
+        // 2, 3 ve 4. Kartlar: Gerçekleşen Geçmiş İşlemlerden (hist) Doğrudan Hesaplama
         var dGross = 0, dLoss = 0, dTrades = 0;
-        var listToUse = (s.history && s.history.length > 0) ? s.history : [];
-
-        listToUse.forEach(item => {
-            var p = parseFloat(item.pnl !== undefined ? item.pnl : (item.netProfit || item.netPnl || 0));
-            if (!isNaN(p)) {
+        for (var idx = 0; idx < hist.length; idx++) {
+            var item = hist[idx];
+            var pVal = parseFloat(item.pnl !== undefined ? item.pnl : (item.netProfit || item.netPnl || 0));
+            if (!isNaN(pVal)) {
                 dTrades++;
-                if (p >= 0) dGross += p;
-                else dLoss += Math.abs(p);
+                if (pVal >= 0) dGross += pVal;
+                else dLoss += Math.abs(pVal);
             }
-        });
-
+        }
         var dNet = dGross - dLoss;
         var dAvg = dTrades > 0 ? (dNet / dTrades) : 0;
 
+        // 2. Günlük Net Kâr
+        var elNet = document.getElementById('statTodayClosed');
+        if (elNet) {
+            elNet.textContent = (dNet >= 0 ? '+' : '-') + '$' + Math.abs(dNet).toFixed(2);
+            elNet.className = 'text-xl font-bold mt-1 ' + (dNet >= 0 ? 'text-emerald-400' : 'text-rose-500');
+        }
+
+        // 3. Brüt Kâr / Zarar
+        var elW = document.getElementById('statWinPnl');
+        if (elW) elW.textContent = '+$' + dGross.toFixed(2);
+
+        var elL = document.getElementById('statLossPnl');
+        if (elL) elL.textContent = '-$' + dLoss.toFixed(2);
+
+        // 4. İşlem Sayısı | Ortalama Kâr
         var elTrades = document.getElementById('statTradeCount');
         if (elTrades) elTrades.textContent = dTrades;
 
@@ -399,12 +406,6 @@
             elAvg.textContent = (dAvg >= 0 ? '+' : '-') + '$' + Math.abs(dAvg).toFixed(2);
             elAvg.className = (dAvg >= 0 ? 'text-emerald-400' : 'text-rose-400') + ' text-base font-bold';
         }
-
-        var elW = document.getElementById('statWinPnl') || document.getElementById('statGrossProfit');
-        if (elW) elW.textContent = '+$' + dGross.toFixed(2);
-
-        var elL = document.getElementById('statLossPnl') || document.getElementById('statGrossLoss');
-        if (elL) elL.textContent = '-$' + dLoss.toFixed(2);
 
         // 5. Canlı PnL ve Slot Durumu
         var livePnl = Number(s.liveUnrealizedPnl || 0);
